@@ -1,19 +1,32 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <Navbar />
+    
+    <router-view>
+
+    </router-view>
+  </div>
 </template>
 
 <script>
+import Navbar from './components/navbar.vue';
 
 export default {
   name: 'App',
   components: {
-    
+    Navbar,
+  },
+  data() {
+    return {
+      
+    }
   }
 }
 </script>
 
-<style>
+<style lang="scss">
+@import '../public/scss/global.scss';
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
