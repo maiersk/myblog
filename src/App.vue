@@ -1,17 +1,7 @@
 <template>
   <div class="theme">
     <aside>
-      <div class="presonal">
-        <img id="avatar" src="./assets/avatar.jpg" width="64" height="64" />
-        <router-link to="/about" id="name">
-          <span>Maiersk</span>
-        </router-link>
-        <!-- <span v-if="moreinfo.disply">
-          <li v-for="oldname in moreinfo.names" :key="oldname">
-            {{oldname}}
-          </li>
-        </span>-->
-      </div>
+      <presonal />
       <Navbar :navlinks="links" />
 
       <footer>
@@ -26,6 +16,7 @@
 </template>
 
 <script>
+import Presonal from "./components/presonal";
 import Navbar from "./components/navbar.vue";
 import AcIcon from "./components/account_icon";
 import svgData from "./assets/bilibilisvgdata";
@@ -33,6 +24,7 @@ import svgData from "./assets/bilibilisvgdata";
 export default {
   name: "App",
   components: {
+    Presonal,
     Navbar,
     AcIcon,
   },
@@ -49,7 +41,7 @@ export default {
         { href: "https://github.com/maiersk", icon: ["fab", "github"] },
         { title: "1103178985", icon: ["fab", "qq"] },
         { href: "https://weibo.com/5092698277/", icon: ["fab", "weibo"] },
-        {href: "https://space.bilibili.com/7947919", data: svgData},
+        { href: "https://space.bilibili.com/7947919", data: svgData },
       ],
     };
   },
@@ -58,6 +50,12 @@ export default {
 
 <style lang="scss">
 @import "../public/scss/global.scss";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -81,26 +79,8 @@ aside {
 
 main {
   margin-left: $navbar-width;
+  height: 100vh!important;
+  padding: 1rem;
 }
 
-.presonal {
-  display: flex;
-  align-items: center;
-  flex-flow: column;
-  margin-top: 1rem;
-
-  #avatar {
-    border-radius: 30px;
-    box-shadow: 0 0 10px 2px #303030;
-  }
-  #name {
-    margin-top: 1rem;
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-    font: {
-      weight: bolder;
-    }
-  }
-}
 </style>
