@@ -1,7 +1,5 @@
 <template>
-  <div class="d-page" >
-    About
-  </div>
+  blogList
 </template>
 
 <script>

@@ -1,25 +1,65 @@
-$body_bg_color: #151515;
+$navbar-width: 262px;
 $navbar_bg_color: #ff8438;
 $navbar_txt_color: white;
 $navbar_bg_shadow_color: #960000;
 
-$main_bg_color: #232323;
+$main_bg_color: #151515;
+$main_page_bg_color: #232323;
+$main_page_el_color: #282828;
 
-$navbar-width: 262px;
+body { background-color: $main_bg_color;}
+.theme {
+  color: white;
+  aside {
+    border-radius: 10px;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    box-shadow: 5px 0px 5px $navbar_bg_shadow_color;
+    
+    footer {
 
-body {
-  background-color: $body_bg_color;
+    }
+  }
+  main {
+    box-shadow: 0 1px 2px rgba(0,0,0,.2);
+    background-color: $main_bg_color;
+
+    .d-page {
+      height: 100%;
+      padding: 1rem;
+      border-radius: 5px;
+      background: $main_page_bg_color;
+      > h1 {
+        margin: 1rem;
+        background-color: $main_page_el_color;
+        border: 1px solid #303030;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
   .theme {
-    color: white;
+
     aside {
-      border-radius: 4px;
-      box-shadow: 5px 0px 5px $navbar_bg_shadow_color;
+      width: 100vw;
+      border-radius: 10px;
+
+      footer {
+        width: 100vw;
+      }
     }
     main {
-      border-radius: 4px;
-      box-shadow: 0 1px 2px rgba(0,0,0,.2);
-      background-color: $main_bg_color;
+      
+      .d-page {
+        
+        > h1 {
+          
+        }
+      }
     }
+
+
   }
 }
 
@@ -33,4 +73,8 @@ footer {
 .c_ul {
   list-style: none;
   padding-left: 0;
+}
+
+.vh-100 {
+  height: 100vh!important;
 }

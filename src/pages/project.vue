@@ -1,5 +1,7 @@
 <template>
-  project
+  <div class="d-page">
+    project    
+  </div>
 </template>
 
 <script>
