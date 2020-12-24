@@ -10,20 +10,6 @@
         :title="icon.title ? icon.title : ''"
         width="32"
       >
-        <!-- <svg
-          id="c_icon"
-          v-if="icon.data"
-          version="1.1"
-          xmlns="http://www.w3.org/2000/svg"
-          xmlns:xlink="http://www.w3.org/1999/xlink"
-          x="0px"
-          y="0px"
-          width="32px"
-          height="32px"
-          viewBox="0 0 32 32"
-          enable-background="new 0 0 32 32"
-          xml:space="preserve"
-        >-->
         <svg
           v-if="icon.data"
           class="svg-inline--fa fa-weibo fa-w-16 fa-2x faicon"
@@ -36,8 +22,12 @@
           viewBox="0 0 512 512"
           data-v-e2751c4a
         >
-          <path width="32" height="32" x="0" y="0" fill="currentColor" :d="icon.data" />
-          <!-- <image width="32" height="32" x="0" y="0" :href="icon.data" /> -->
+          <path
+            transform="matrix(1.28 0 0 1.3656 0 0)"
+            width="24" height="24"
+            x="0" y="0" fill="currentColor"
+            :d="icon.data"
+          />
         </svg>
         <faIcon v-else class="faicon" :icon="icon.icon" size="2x"></faIcon>
       </a>
