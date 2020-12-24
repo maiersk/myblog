@@ -2,61 +2,62 @@
   <div class="theme">
     <aside>
       <div class="presonal">
-        <img id="avatar" src="./assets/avatar.jpg" width="64" height="64">
+        <img id="avatar" src="./assets/avatar.jpg" width="64" height="64" />
         <router-link to="/about" id="name">
-          <span> Maiersk </span>
+          <span>Maiersk</span>
         </router-link>
         <!-- <span v-if="moreinfo.disply">
           <li v-for="oldname in moreinfo.names" :key="oldname">
             {{oldname}}
           </li>
-        </span> -->
+        </span>-->
       </div>
       <Navbar :navlinks="links" />
 
       <footer>
-        <AcIcon :account_pages="ac_pages" />
+        <AcIcon :account_pages="acPages" />
       </footer>
     </aside>
-    
+
     <main>
-      <router-view></router-view>      
+      <router-view></router-view>
     </main>
   </div>
 </template>
 
 <script>
-import Navbar from './components/navbar.vue'
-import AcIcon from './components/account_icon'
+import Navbar from "./components/navbar.vue";
+import AcIcon from "./components/account_icon";
+import svgData from "./assets/bilibilisvgdata";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    Navbar, 
+    Navbar,
     AcIcon,
   },
   data() {
     return {
-      moreinfo: {display: false, names: ['ABTTEX']},
+      moreinfo: { display: false, names: ["ABTTEX"] },
       links: [
-        {to: '/', title: 'Home'},
-        {to: '/blog', title: 'Blog'},
-        {to: '/project', title: 'Project'},
-        {to: '/about', title: 'About'},
+        { to: "/", title: "Home" },
+        { to: "/blog", title: "Blog" },
+        { to: "/project", title: "Project" },
+        { to: "/about", title: "About" },
       ],
-      ac_pages: [
-        {href: 'https://github.com/maiersk', icon:['fab','github']},
-        {title: '1103178985', icon:['fab', 'qq']},
-        {href: 'https://weibo.com/5092698277/', icon:['fab','weibo']},
-        {href: 'https://space.bilibili.com/7947919', img:'../assets/bilibili.png'}
-      ]
-    }
+      acPages: [
+        { href: "https://github.com/maiersk", icon: ["fab", "github"] },
+        { title: "1103178985", icon: ["fab", "qq"] },
+        { href: "https://weibo.com/5092698277/", icon: ["fab", "weibo"] },
+        {href: "https://space.bilibili.com/7947919", data: svgData},
+      ],
+    };
   },
-}
+};
 </script>
 
 <style lang="scss">
-@import '../public/scss/global.scss';
+@import "../public/scss/global.scss";
 
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -87,7 +88,7 @@ main {
   align-items: center;
   flex-flow: column;
   margin-top: 1rem;
-  
+
   #avatar {
     border-radius: 30px;
     box-shadow: 0 0 10px 2px #303030;
@@ -102,5 +103,4 @@ main {
     }
   }
 }
-
 </style>
