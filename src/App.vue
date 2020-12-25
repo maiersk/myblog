@@ -32,10 +32,10 @@ export default {
     return {
       moreinfo: { display: false, names: ["ABTTEX"] },
       links: [
-        { to: "/", title: "Home" },
-        { to: "/blog", title: "Blog" },
-        { to: "/project", title: "Project" },
-        { to: "/about", title: "About" },
+        { to: "/", title: "Home", icon: ["fa", "home"] },
+        { to: "/blog", title: "Blog", icon: ["fa", "blog"] },
+        { to: "/project", title: "Project", icon: ['fas','project-diagram'] },
+        { to: "/about", title: "About", icon: ['fas','address-card'] },
       ],
       acPages: [
         { href: "https://github.com/maiersk", icon: ["fab", "github"] },
@@ -79,8 +79,7 @@ aside {
 
 main {
   margin-left: $navbar-width;
-  height: 100vh!important;
+  height: 100vh !important;
   padding: 1rem;
 }
-
 </style>

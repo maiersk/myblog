@@ -2,7 +2,10 @@
   <div class="navbar">
     <ul class="c_ul">
       <li v-for="link in navlinks" :key="link">
-        <router-link :to="link.to">{{link.title}}</router-link>
+        <router-link :to="link.to">
+          <faIcon class="faicon" :icon="link.icon" />
+          <span>{{link.title}}</span>
+        </router-link>
       </li>
     </ul>
   </div>
@@ -39,6 +42,7 @@ export default {
         line-height: 2rem;
         background-color: black;
         box-shadow: 0px 3px 6px 1px #2d2d2dd4;
+        transition: all 0.3s ease;
       }
       li:hover {
         background-color: #2d2d2d;
@@ -49,6 +53,19 @@ export default {
         color: $navbar_bg_color;
         text-decoration: none;
         font-weight: bold;
+        width: 50%;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        transition: all 0.3s ease;
+        
+        .faicon {
+          width: 40%;
+          text-align: center;
+        } 
+        span {
+          @extend .faicon;
+        }
       }
     }
   }
