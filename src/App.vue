@@ -31,12 +31,7 @@ export default {
   data() {
     return {
       moreinfo: { display: false, names: ["ABTTEX"] },
-      links: [
-        { to: "/", title: "Home", icon: ["fa", "home"] },
-        { to: "/blog", title: "Blog", icon: ["fa", "blog"] },
-        { to: "/project", title: "Project", icon: ['fas','project-diagram'] },
-        { to: "/about", title: "About", icon: ['fas','address-card'] },
-      ],
+      links: [],
       acPages: [
         { href: "https://github.com/maiersk", icon: ["fab", "github"] },
         { href: "https://steamcommunity.com/profiles/76561198098162297", icon: ["fab", "steam"] },
@@ -45,6 +40,9 @@ export default {
       ],
     };
   },
+  beforeMount() {
+    this.links = this.$router.getRoutes();
+  }
 };
 </script>
 
@@ -61,7 +59,6 @@ export default {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
 }
 
 .theme {
