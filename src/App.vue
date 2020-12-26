@@ -39,9 +39,9 @@ export default {
       ],
       acPages: [
         { href: "https://github.com/maiersk", icon: ["fab", "github"] },
-        { title: "1103178985", icon: ["fab", "qq"] },
-        { href: "https://weibo.com/5092698277/", icon: ["fab", "weibo"] },
+        { href: "https://steamcommunity.com/profiles/76561198098162297", icon: ["fab", "steam"] },
         { href: "https://space.bilibili.com/7947919", data: svgData },
+        { title: "1103178985", icon: ["fab", "qq"] },
       ],
     };
   },
@@ -79,7 +79,7 @@ aside {
 
 main {
   margin-left: $navbar-width;
-  height: 100vh !important;
+  height: 100vh;
   padding: 1rem;
 }
 </style>
