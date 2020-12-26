@@ -2,9 +2,9 @@
   <div class="navbar">
     <ul class="c_ul">
       <li v-for="link in navlinks" :key="link">
-        <router-link :to="link.to">
-          <faIcon class="faicon" :icon="link.icon" />
-          <span>{{link.title}}</span>
+        <router-link :to="link.path">
+          <faIcon class="faicon" :icon="link.meta.icon" />
+          <span>{{link.meta.title}}</span>
         </router-link>
       </li>
     </ul>
@@ -53,18 +53,45 @@ export default {
         color: $navbar_bg_color;
         text-decoration: none;
         font-weight: bold;
-        width: 50%;
-        margin: 0 auto;
+        width: 100%;
         display: flex;
+        justify-content: center;
         align-items: center;
         transition: all 0.3s ease;
         
         .faicon {
-          width: 40%;
+          width: 18px;
           text-align: center;
         } 
         span {
+          width: 30%;
           @extend .faicon;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    .navbar {
+      position: fixed;
+      top: 0;
+      margin: 0;
+      margin-top: 1rem;
+
+      ul {
+        margin-top: 0;
+        width: 100vw;
+
+        li {
+          margin-top: 0rem;
+          width: 25%;
+          float: left;
+        }
+        a {
+          
+          span {
+            width: 60%;
+          }
         }
       }
     }

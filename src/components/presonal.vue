@@ -47,8 +47,8 @@ export default {
     position: absolute;
     top: 0;
     left: 0;
-    width: 10px;
-    height: 10px;
+    width: 0.6rem;
+    height: 0.6rem;
     border-radius: 100%;
     background: black;
     color: #151515;
@@ -63,6 +63,7 @@ export default {
     text-align: center;
   }
   .login:active {
+    height: 1.5rem;
     background-color: #232323;
   }
 
@@ -83,6 +84,30 @@ export default {
       cursor: pointer;
       font: {
         weight: bolder;
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    .login {
+      position: absolute;
+      top: 6.5vh;
+      font-size: 10px;
+    }
+    .login:hover {
+      width: 3rem;
+      height: 0.8rem;
+    }
+    .login:active {
+      height: 0.5rem;
+    }
+    .presonal {
+      padding: 0.1rem;
+      #avatar {
+        display: none;
+      }
+      #name {
+        display: none;
       }
     }
   }

@@ -46,6 +46,11 @@ export default {
 <style lang="scss" scoped>
 .part_account {
   margin-bottom: 1rem;
+  text-align: center;
+
+  span {
+    font-weight: bolder;
+  }
   div {
     margin-top: 0.5rem;
     display: flex;
@@ -64,10 +69,11 @@ export default {
       }
     }
   }
+}
 
-  span {
-    margin-left: 0.5rem;
-    font-weight: bolder;
+@media (max-width: 768px) {
+  .part_account {
+    display: none;
   }
 }
 </style>
