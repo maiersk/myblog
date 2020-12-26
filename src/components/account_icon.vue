@@ -5,7 +5,7 @@
     <div>
       <a
         v-for="icon in account_pages"
-        :key="icon"
+        :key="icon" class="c_a"
         :href="icon.href ? icon.href : '#'"
         :title="icon.title ? icon.title : ''"
         width="32"
@@ -36,18 +36,9 @@
 </template>
 
 <script>
-import { ref } from "vue";
-
 export default {
   props: {
     account_pages: Object,
-  },
-  setup() {
-    const linkRef = ref("");
-
-    return {
-      linkRef,
-    };
   },
 };
 </script>
@@ -63,7 +54,6 @@ export default {
     a {
       margin: 0.5rem;
       height: 100%;
-      text-decoration: none;
       color: white;
 
       .faicon {

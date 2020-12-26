@@ -1,6 +1,6 @@
 <template>
   <div class="d-page">
-    project    
+    <h1>project</h1>    
   </div>
 </template>
 
