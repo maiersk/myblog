@@ -3,9 +3,9 @@
     <div class="modal" v-if="isOpen">
       <section @click="close()"></section>
       <div class="modal-body modal-theme">
-        <h1>
-          <slot name="title">title</slot>
-        </h1>
+        <slot name="title">
+          <h1>Modal</h1>
+        </slot>
         <main>
           <slot name="body">body</slot>
         </main>
@@ -49,15 +49,6 @@ export default {
     transform: translateY(-20px);
     opacity: 0;
   }
-  // .fade-enter-active,
-  // .fade-leave-active {
-  //   transition: opacity 0.3s ease;
-  // }
-
-  // .fade-enter-from,
-  // .fade-leave-to {
-  //   opacity: 0;
-  // }
 
   .modal {
     position: fixed;
@@ -92,11 +83,7 @@ export default {
       border-radius: 5px;
       box-shadow: 0 0 5px 1px #2d2d2d;
 
-      > h1 {
-        padding: 0.5rem;
-      }
       main {
-        margin: 0;
         width: 100%;
         height: auto;
       }

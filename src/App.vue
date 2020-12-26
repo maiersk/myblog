@@ -64,22 +64,25 @@ export default {
   text-align: center;
 }
 
-aside {
-  position: fixed;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  overflow-y: auto;
-  background-color: $navbar_bg_color;
+.theme {
+  > aside {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    overflow-y: auto;
+    background-color: $navbar_bg_color;
+  }
+
+  .navbar {
+    width: $navbar-width;
+  }
+
+  > main {
+    margin-left: $navbar-width;
+    height: 100vh;
+    padding: 1rem;
+  }
 }
 
-.navbar {
-  width: $navbar-width;
-}
-
-main {
-  margin-left: $navbar-width;
-  height: 100vh;
-  padding: 1rem;
-}
 </style>

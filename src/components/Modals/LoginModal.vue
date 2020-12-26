@@ -1,6 +1,8 @@
 <template>
   <Modal>
-    <template #title>Login</template>
+    <template #title>
+      <h1>Login</h1>
+    </template>
     <template #body> 
       <h2>select account login</h2>
       <div class="login_content">
@@ -39,6 +41,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  h1 {
+    padding: 0.5rem;
+  }
   h2 {
     padding: 0.5rem;
     text-align: center;

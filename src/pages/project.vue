@@ -1,12 +1,21 @@
 <template>
-  <div class="d-page">
-    <h1>project</h1>    
-  </div>
+  <PageTheme>
+    <template #title>
+      <h1>Project</h1>
+    </template>
+    <template #body>
+      Project list
+    </template>
+  </PageTheme>
 </template>
 
 <script>
-export default {
+import PageTheme from "../components/PageTheme";
 
+export default {
+  components: {
+    PageTheme,
+  },
 }
 </script>
 
