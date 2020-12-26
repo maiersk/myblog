@@ -1,3 +1,5 @@
+@import "./util.scss";
+
 $navbar-width: 262px;
 $navbar_bg_color: #ff8438;
 $navbar_txt_color: white;
@@ -6,6 +8,8 @@ $navbar_bg_shadow_color: #960000;
 $main_bg_color: #151515;
 $main_page_bg_color: #232323;
 $main_page_el_color: #282828;
+
+$modal_bg_color: $main_page_bg_color;
 
 body { background-color: $main_bg_color;}
 .theme {
@@ -30,7 +34,7 @@ body { background-color: $main_bg_color;}
       border-radius: 5px;
       background: $main_page_bg_color;
       > h1 {
-        margin: 1rem;
+        padding: 0.5rem;
         background-color: $main_page_el_color;
         border: 1px solid #303030;
         border-radius: 2px;
@@ -71,36 +75,6 @@ footer {
   bottom: 0;
 }
 
-.c_ul {
-  list-style: none;
-  padding-left: 0;
-}
-
-.vh-100 {
-  height: 100vh!important;
-}
-
-.btn {
-  width: 5rem;
-  height: 2rem;
-  border: none;
-  border-radius: 4px;
-  box-shadow: 0 0 5px 1px #2d2d2dd4;
-  background-color: #f8f9fa;
-  border-color: #f8f9fa;
-  cursor: pointer;
-  margin: 0.5rem;
-  color: #151515;
-  outline-color: #d0d0d0;
-}
-.btn:hover {
-  background-color: #d0d0d0;
-}
-.btn:focus {
-  outline: none;
-  box-shadow: 0 0 5px 2px #2d2d2dd4;
-}
-
 .btn-theme {
   background-color: black;
   border-color: #303030;
@@ -115,4 +89,29 @@ footer {
   color: white;
 }
 .btn-theme:active {
+}
+
+.modal-theme {
+  color: white;
+  background-color: $modal_bg_color !important;
+
+  h1 {
+    text-align: center;
+    border: 1px solid #303030;
+    border-bottom-color: $navbar_bg_color;
+  }
+  main {
+    h2 {
+      
+    }
+    .login_content {
+
+    }
+  }
+  a {
+    color: $navbar_bg_color;
+  }
+  a:hover {
+    color: white;
+  }
 }
