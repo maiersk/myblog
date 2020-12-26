@@ -4,29 +4,36 @@
     value="Login"
     @click="openLogin"
   >
-  
+
   <div class="presonal">
     <img id="avatar" src="../assets/avatar.jpg" width="64" height="64" />
     <router-link to="/about" id="name">
       <span>Maiersk</span>
     </router-link>
-    <!-- <span v-if="moreinfo.disply">
-      <li v-for="oldname in moreinfo.names" :key="oldname">
-        {{oldname}}
-      </li>
-    </span>-->
   </div>
+
+  <teleport to="body">
+    <LoginModal />
+  </teleport>
 </template>
 
 <script>
-// import { ref } from 'vue';
-// import modal from "../components/modal";
+import { provide, ref } from 'vue';
+import LoginModal from "../components/Modals/LoginModal";
 
-export default {
-  extends: {
+export default { 
+  components: { 
+    LoginModal 
   },
   setup() {
+    const isOpen = ref(false);
+    // 提供/注入方法 
+    // provide 和 inject 只是绑定普通数据并不是可响应的。
+    // 如果你传入了一个可监听的对象，那么其对象的属性可响应的。
+    provide("isOpen", isOpen);
+
     const openLogin = () => {
+      isOpen.value = true;
     }
     return {
       openLogin,
@@ -57,7 +64,6 @@ export default {
   }
   .login:active {
     background-color: #232323;
-    top: 1px;
   }
 
   .presonal {
