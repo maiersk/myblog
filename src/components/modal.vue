@@ -89,4 +89,18 @@ export default {
       }
     }
   }
+
+  @media (max-width: 768px) {
+    .modal {
+      // section {
+      // }
+      .modal-body {
+        width: 90vw;
+
+        // main {
+          
+        // }
+      }
+    }
+  }
 </style>
