@@ -90,9 +90,7 @@ export default {
 
   @media (max-width: 768px) {
     .login {
-      position: absolute;
-      top: 6.5vh;
-      font-size: 10px;
+      display: none;
     }
     .login:hover {
       width: 3rem;
@@ -102,12 +100,16 @@ export default {
       height: 0.5rem;
     }
     .presonal {
+      margin-top: 0;
       padding: 0.1rem;
+      display: flex;
+      flex-flow: row-reverse;
+
       #avatar {
-        display: none;
+        margin: 0.5rem;
       }
       #name {
-        display: none;
+        margin: 0.5rem;
       }
     }
   }

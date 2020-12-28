@@ -82,4 +82,43 @@ export default {
   }
 }
 
+
+
+@media (max-width: 768px) {
+  .theme {
+
+    > aside {
+      position: absolute;
+      top: 0;
+      z-index: 1;
+      width: 100vw;
+      height: 85px;
+
+      border-top-right-radius: 0;
+      border-bottom-left-radius: 10px;
+      box-shadow: 0 5px 5px #960000;
+      // footer {
+      // }
+    }
+    > main {
+      position: relative;
+      margin-left: 0 !important;
+      margin-top: 85px;
+      // top: 10vh;
+      // width: 100vw;
+      // height: 100vh !important;
+      // margin-left: 0 !important;
+      // overflow-y: auto;
+
+      .page-theme {
+        
+        > div {
+          
+        }
+      }
+    }
+
+
+  }
+}
 </style>

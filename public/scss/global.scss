@@ -53,36 +53,7 @@ body { background-color: $main_bg_color;}
   }
 }
 
-@media (max-width: 768px) {
-  .theme {
 
-    > aside {
-      width: 100vw;
-      height: 10vh;
-      border-radius: 10px;
-
-      // footer {
-      // }
-    }
-    > main {
-      position: fixed;
-      top: 10vh;
-      width: 100vw;
-      height: 100vh !important;
-      margin-left: 0 !important;
-      overflow-y: auto;
-
-      .page-theme {
-        
-        > div {
-          
-        }
-      }
-    }
-
-
-  }
-}
 
 footer {
   width: $navbar-width;
