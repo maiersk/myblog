@@ -88,7 +88,7 @@ export default {
   .theme {
 
     > aside {
-      position: absolute;
+      position: relative;
       top: 0;
       z-index: 1;
       width: 100vw;
@@ -103,7 +103,6 @@ export default {
     > main {
       position: relative;
       margin-left: 0 !important;
-      margin-top: 85px;
       // top: 10vh;
       // width: 100vw;
       // height: 100vh !important;
