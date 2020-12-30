@@ -86,14 +86,14 @@ export default {
 
 @media (max-width: 768px) {
   .theme {
-
+    z-index: -30;
     > aside {
       position: relative;
       top: 0;
-      z-index: 1;
       width: 100vw;
       height: 85px;
 
+      overflow: initial;
       border-top-right-radius: 0;
       border-bottom-left-radius: 10px;
       box-shadow: 0 5px 5px #960000;
@@ -103,6 +103,8 @@ export default {
     > main {
       position: relative;
       margin-left: 0 !important;
+
+      z-index: -20;
       // top: 10vh;
       // width: 100vw;
       // height: 100vh !important;

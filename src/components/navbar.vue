@@ -1,32 +1,32 @@
 <template>
   <div class="nav_content">
-    <button class="c_a btn btn-theme bar_btn">
+    <button class="c_a btn btn-theme bar_btn" @click="bar_open = !bar_open">
       <faIcon :icon="['fa', 'bars']"></faIcon>
     </button>
-    <transition name="fade">
-      <div class="navbar">
-        <ul class="c_ul">
-          <li v-for="link in navlinks" :key="link">
-            <router-link :to="link.path">
-              <faIcon class="faicon" :icon="link.meta.icon" />
-              <span>{{link.meta.title}}</span>
-            </router-link>
-          </li>
-        </ul>
-      </div>
-    </transition>
+    <div class="navbar" :class="bar_open ? 'nav_open' : ''">
+      <ul class="c_ul">
+        <li v-for="link in navlinks" :key="link">
+          <router-link :to="link.path">
+            <faIcon class="faicon" :icon="link.meta.icon" />
+            <span>{{link.meta.title}}</span>
+          </router-link>
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 
 <script>
+import { ref } from 'vue'
 export default {
   props: {
     navlinks: Array,
   },
   setup() {
-
+    const bar_open = ref(false);
+    
     return {
-
+      bar_open,
     }
   }
 }
@@ -98,16 +98,21 @@ export default {
       }
 
       .navbar {
-        display: none;
+        position: relative;
+        top: 0;
         width: 100% !important;
-        background-color: #ff8438;
+        background-color: $navbar_bg_color;
+        transform: translateY(-200%);
+        transition: all .5s ease;
+        height: 100%;
+        z-index: -1;
 
         ul {
           margin: 0;
-  
+          height: 100%;
           li {
-            width: 25%;
-            float: left;
+            margin: 0.5rem;
+            margin-top: 0;
           }
           // a {
             
@@ -118,26 +123,8 @@ export default {
         }
       }
 
-      .fade-enter-from {
-        display: block;
-        position: absolute;
-        top: 0;
-        
-      }
-      .fade-leave-from {
-        transform: translateY(10rem);
-      }
-      .fade-enter-active {
-        transition: all .3s ease;
-      }
-      .fade-leave-active {
-        transition: all .3s ease;
-      }
-      .fade-enter-to {
-
-      }
-      .fade-leave-to {
-        transform: translateY(10rem);
+      .nav_open {
+        transform: translateY(-10%);
       }
     }
   }
