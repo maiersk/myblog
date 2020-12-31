@@ -73,7 +73,8 @@ export default {
 
 @media (max-width: 768px) {
   .part_account {
-    display: none;
+    display: block;
+    margin-bottom: 0;
   }
 }
 </style>

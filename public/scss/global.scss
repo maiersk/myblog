@@ -20,20 +20,18 @@ body { background-color: $main_bg_color;}
     border-bottom-left-radius: 0;
     box-shadow: 5px 0px 5px $navbar_bg_shadow_color;
     
-    footer {
-
-    }
   }
+
   > main {
     box-shadow: 0 1px 2px rgba(0,0,0,.2);
     background-color: $main_bg_color;
-
+    
     .page-theme {
       height: 100%;
       padding: 0.5rem;
       border-radius: 5px;
       background: $main_page_bg_color;
-
+      
       .path {
         .faicon {
           color: $navbar_bg_color;
@@ -51,15 +49,13 @@ body { background-color: $main_bg_color;}
       }
     }
   }
-}
 
-
-
-footer {
-  width: $navbar-width;
-  overflow-x: auto;
-  position: fixed;
-  bottom: 0;
+  > footer {
+    width: $navbar-width;
+    overflow-x: auto;
+    position: fixed;
+    bottom: 0;
+  }
 }
 
 .btn-theme {
@@ -75,8 +71,8 @@ footer {
   background-color: #2d2d2d;
   color: white;
 }
-.btn-theme:active {
-}
+// .btn-theme:active {
+// }
 
 .modal-theme {
   color: white;
@@ -87,14 +83,14 @@ footer {
     border: 1px solid #303030;
     border-bottom-color: $navbar_bg_color;
   }
-  main {
-    h2 {
+  // main {
+  //   h2 {
       
-    }
-    .login_content {
+  //   }
+  //   .login_content {
 
-    }
-  }
+  //   }
+  // }
   a {
     color: $navbar_bg_color;
   }

@@ -2,16 +2,16 @@
   <div class="theme">
     <aside>
       <presonal />
-
-      <footer>
-        <AcIcon :account_pages="acPages" />
-      </footer>
     </aside>
     <Navbar :navlinks="links" />
-    
+
     <main>
       <router-view></router-view>
     </main>
+
+    <footer>
+      <AcIcon :account_pages="acPages" />
+    </footer>
   </div>
 </template>
 
@@ -97,27 +97,26 @@ export default {
       border-top-right-radius: 0;
       border-bottom-left-radius: 10px;
       box-shadow: 0 5px 5px #960000;
-      // footer {
-      // }
+
     }
+
     > main {
       position: relative;
       margin-left: 0 !important;
-      // top: 10vh;
-      // width: 100vw;
-      // height: 100vh !important;
-      // margin-left: 0 !important;
-      // overflow-y: auto;
 
-      .page-theme {
+      // .page-theme {
         
-        > div {
+      //   > div {
           
-        }
-      }
+      //   }
+      // }
     }
 
-
+    > footer {
+      position: relative;
+      bottom: 0;
+      width: 100%;
+    }
   }
 }
 </style>
