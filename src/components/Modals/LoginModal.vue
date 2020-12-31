@@ -56,9 +56,9 @@ export default {
     .c_ul > li {
       float: left;
       margin: 1rem;
-      > a {
+      // > a {
 
-      }
+      // }
     }
   }
 </style>

@@ -71,15 +71,18 @@ export default {
     background-color: $navbar_bg_color;
     width: $navbar-width;
   }
-
-  .navbar {
-    width: 100%;
-  }
-
+  
   > main {
     margin-left: $navbar-width;
     height: 100vh;
     padding: 1rem;
+  }
+
+  > footer {
+    width: $navbar-width;
+    overflow-x: auto;
+    position: fixed;
+    bottom: 0;
   }
 }
 

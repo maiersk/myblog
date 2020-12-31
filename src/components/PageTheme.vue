@@ -31,6 +31,10 @@ export default {
 
 <style lang="scss" scoped>
   .page-theme {
+    height: 100%;
+    padding: 0.5rem;
+    border-radius: 5px;
+    
     .path {
       .faicon {
         width: 18px;
@@ -38,8 +42,13 @@ export default {
       }
       text-align: left;
     }
+    
     > main {
-      
+      margin: 0.5rem;
+      padding: 0.5rem;
+    }
+    > div {
+      @extend main;
     }
   }
 </style>
