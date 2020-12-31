@@ -2,13 +2,13 @@
   <div class="theme">
     <aside>
       <presonal />
-      <Navbar :navlinks="links" />
 
       <footer>
         <AcIcon :account_pages="acPages" />
       </footer>
     </aside>
-
+    <Navbar :navlinks="links" />
+    
     <main>
       <router-view></router-view>
     </main>
@@ -69,10 +69,11 @@ export default {
     bottom: 0;
     overflow-y: auto;
     background-color: $navbar_bg_color;
+    width: $navbar-width;
   }
 
   .navbar {
-    width: $navbar-width;
+    width: 100%;
   }
 
   > main {
@@ -86,13 +87,12 @@ export default {
 
 @media (max-width: 768px) {
   .theme {
-    z-index: -30;
     > aside {
       position: relative;
       top: 0;
       width: 100vw;
       height: 85px;
-
+      z-index: 2;
       overflow: initial;
       border-top-right-radius: 0;
       border-bottom-left-radius: 10px;
@@ -103,8 +103,6 @@ export default {
     > main {
       position: relative;
       margin-left: 0 !important;
-
-      z-index: -20;
       // top: 10vh;
       // width: 100vw;
       // height: 100vh !important;
