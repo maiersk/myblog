@@ -92,11 +92,11 @@ export default {
 
   @media (max-width: 768px) {
     .modal {
+      z-index: 3;
       // section {
       // }
       .modal-body {
         width: 90vw;
-
         // main {
           
         // }

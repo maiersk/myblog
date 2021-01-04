@@ -13,6 +13,9 @@
         </li>
       </ul>
     </div>
+    <section :class="bar_open ? 'nav_section' : ''"
+      @click="open()"
+    ></section>
   </div>
 </template>
 
@@ -28,7 +31,7 @@ export default {
     const open = () => {
       bar_open.value = !bar_open.value;
     }
-    
+
     return {
       bar_open,
       open,
@@ -48,40 +51,46 @@ export default {
     .bar_btn {
       display: none;
     }
-  }
-  .navbar {
-    ul {
-      li {
-        height: 32px;
-        margin-top: 1rem;
-        border-radius: 4px;
-        line-height: 2rem;
-        background-color: black;
-        box-shadow: 0px 3px 6px 1px #2d2d2dd4;
-        transition: all 0.3s ease;
-      }
-      li:hover {
-        background-color: #2d2d2d;
-        box-shadow: 0px 3px 6px 1px #2d2d2dd4;
-        a { color: white; }
-      }
-      a {
-        color: $navbar_bg_color;
-        text-decoration: none;
-        font-weight: bold;
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        transition: all 0.3s ease;
-        
-        .faicon {
-          width: 18px;
-          text-align: center;
-        } 
-        span {
-          width: 30%;
-          @extend .faicon;
+
+    .nav_section {
+      display: none;
+      transition: all 0.5s ease-in-out;
+    }
+
+    .navbar {
+      ul {
+        li {
+          height: 32px;
+          margin-top: 1rem;
+          border-radius: 4px;
+          line-height: 2rem;
+          background-color: black;
+          box-shadow: 0px 3px 6px 1px #2d2d2dd4;
+          transition: all 0.3s ease;
+        }
+        li:hover {
+          background-color: #2d2d2d;
+          box-shadow: 0px 3px 6px 1px #2d2d2dd4;
+          a { color: white; }
+        }
+        a {
+          color: $navbar_bg_color;
+          text-decoration: none;
+          font-weight: bold;
+          width: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          transition: all 0.3s ease;
+          
+          .faicon {
+            width: 18px;
+            text-align: center;
+          } 
+          span {
+            width: 30%;
+            @extend .faicon;
+          }
         }
       }
     }
@@ -99,7 +108,7 @@ export default {
         width: 2.5rem;
         height: 2.5rem;
         margin: 1.5rem;
-        z-index: 2;
+        z-index: 3;
       }
 
       .navbar {
@@ -110,7 +119,7 @@ export default {
         transform: translateY(-100%);
         transition: all 1s ease;
         overflow: hidden;
-        z-index: 1;
+        z-index: 2;
         padding-top: 0.9rem;
         padding-bottom: 0.3rem;
         
@@ -131,6 +140,18 @@ export default {
       .nav_open {
         overflow: hidden;
         transform: translateY(42%);
+      }
+
+      .nav_section {
+        position: absolute;
+        display: block;
+        width: 100vw;
+        height: 100vh;
+        background-color: #303030;
+        opacity: 0.8;
+        z-index: 1;
+
+        transition: all 0.5s ease-out;
       }
     }
   }

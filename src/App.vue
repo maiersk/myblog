@@ -3,6 +3,7 @@
     <aside>
       <presonal />
     </aside>
+    <LoginButton />
     <Navbar :navlinks="links" />
 
     <main>
@@ -20,6 +21,7 @@ import Presonal from "./components/presonal";
 import Navbar from "./components/navbar.vue";
 import AcIcon from "./components/account_icon";
 import svgData from "./assets/bilibilisvgdata";
+import LoginButton from './components/LoginButton';
 
 export default {
   name: "App",
@@ -27,6 +29,7 @@ export default {
     Presonal,
     Navbar,
     AcIcon,
+    LoginButton,
   },
   data() {
     return {
@@ -95,7 +98,7 @@ export default {
       top: 0;
       width: 100vw;
       height: 85px;
-      z-index: 2;
+      z-index: 3;
       overflow: initial;
       border-top-right-radius: 0;
       border-bottom-left-radius: 10px;
