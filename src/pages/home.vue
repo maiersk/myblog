@@ -4,30 +4,36 @@
       <h1>Home</h1>
     </template>
     <template #body>
-      
+      <input type="button" value="add" @click="add" />
+      {{state.count}}
     </template>
   </PageTheme>
 </template>
 
 <script>
+import { useStore } from "vuex";
 import PageTheme from "../components/PageTheme";
 
 export default {
   components: {
     PageTheme,
   },
-  data() {
+  setup() {
+    const sotre = useStore();
+    const state = sotre.state;
+
+    function add() {
+      sotre.commit("add");
+    }
+
     return {
-      
+      state,
+      add
     }
   },
-  mounted() {
-    
-  }
-}
+};
 </script>
 
 
 <style lang="scss" scoped>
-
 </style>

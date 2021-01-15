@@ -22,6 +22,7 @@ import Navbar from "./components/navbar.vue";
 import AcIcon from "./components/account_icon";
 import svgData from "./assets/bilibilisvgdata";
 import LoginButton from './components/LoginButton';
+import axios from './plugins/axios';
 
 export default {
   name: "App",
@@ -45,6 +46,20 @@ export default {
   },
   beforeMount() {
     this.links = this.$router.getRoutes();
+  },
+  mounted() {
+    // axios.get('/oauth/').then((res) => {
+    //   if (res.data.success) {
+    //     this.$store.user = res.data.user
+    //   }
+    //     console.log(res);
+    // })
+    axios({
+      method: 'get',
+      url: '/oauth/',
+    }).then((res) => {
+      console.log(res)
+    })
   }
 };
 </script>

@@ -8,7 +8,7 @@
       <div class="login_content">
         <ul class="c_ul">
           <li v-for="acc in login_accs" :key="acc">
-            <a class="c_a" href="#" height="48">
+            <a class="c_a" :href="acc?.api ?? '#'" height="48">
               <faIcon size="3x" class="faicon" :icon="acc.icon"></faIcon>
             </a>
           </li>
@@ -19,8 +19,9 @@
 </template>
 
 <script>
-import { reactive } from 'vue';
+import { onMounted, reactive } from 'vue';
 import Modal from '../Modal';
+import axios from '../../plugins/axios';
 
 export default {
   components: {
@@ -28,13 +29,19 @@ export default {
   },
   setup() {
     const login_accs = reactive([
-      {icon: ["fab", "github"], },
-      {icon: ["fab", "steam"], },
-      {icon: ["fab", "qq"], },
+      {icon: ["fab", "github"], api: '/oauth/github/'},
+      {icon: ["fab", "steam"], api: '/oauth/steam'},
     ])
 
+    onMounted(() => {
+      login_accs.forEach(async (item, i) => {
+        const res = await axios.get(item.api)
+        login_accs[i].api = res.data
+      })
+    })
+
     return {
-      login_accs
+      login_accs,
     }
   },
 };
