@@ -1,20 +1,20 @@
 <template>
-  <PageTheme>
+  <page-theme>
     <template #title>
       <h1>About</h1>
     </template>
     <template #body>
       
     </template>
-  </PageTheme>
+  </page-theme>
 </template>
 
 <script>
-import PageTheme from "../components/PageTheme";
+import pageTheme from "../components/pageTheme";
 
 export default {
   components: {
-    PageTheme,
+    pageTheme,
   },
 }
 </script>

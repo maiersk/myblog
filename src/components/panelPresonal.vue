@@ -36,12 +36,13 @@ export default {}
   @media (max-width: 768px) {
     .presonal {
       margin-top: 0;
-      padding: 0.1rem;
       display: flex;
+      height: 100%;
       flex-flow: row-reverse;
 
       #avatar {
         margin: 0.5rem;
+        margin-right: 1rem;
       }
       #name {
         margin: 0.5rem;

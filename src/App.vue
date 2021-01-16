@@ -1,36 +1,41 @@
 <template>
   <div class="theme">
+    <header>
+      <panel-sign-btns />
+
+    </header>
     <aside>
-      <presonal />
+      <nav-bar-btn />
+      <panel-presonal />
     </aside>
-    <LoginButton />
-    <Navbar :navlinks="links" />
+    <nav-bar :navlinks="links" />
 
     <main>
       <router-view></router-view>
     </main>
 
     <footer>
-      <AcIcon :account_pages="acPages" />
+      <panel-ac-icon :account_pages="acPages" />
     </footer>
   </div>
 </template>
 
 <script>
-import Presonal from "./components/presonal";
-import Navbar from "./components/navbar.vue";
-import AcIcon from "./components/account_icon";
 import svgData from "./assets/bilibilisvgdata";
-import LoginButton from './components/LoginButton';
-import axios from './plugins/axios';
+import navBar from "./components/navBar";
+import navBarBtn from "./components/Buttons/navBarBtn";
+import panelPresonal from "./components/panelPresonal";
+import panelAcIcon from "./components/panelAccountIcon";
+import panelSignBtns from './components/panelSignBtns';
 
 export default {
   name: "App",
   components: {
-    Presonal,
-    Navbar,
-    AcIcon,
-    LoginButton,
+    navBar,
+    navBarBtn,
+    panelPresonal,
+    panelAcIcon,
+    panelSignBtns,
   },
   data() {
     return {
@@ -47,20 +52,6 @@ export default {
   beforeMount() {
     this.links = this.$router.getRoutes();
   },
-  mounted() {
-    // axios.get('/oauth/').then((res) => {
-    //   if (res.data.success) {
-    //     this.$store.user = res.data.user
-    //   }
-    //     console.log(res);
-    // })
-    axios({
-      method: 'get',
-      url: '/oauth/',
-    }).then((res) => {
-      console.log(res)
-    })
-  }
 };
 </script>
 
@@ -80,9 +71,22 @@ export default {
 }
 
 .theme {
-  > aside {
+  > header {
     position: fixed;
     top: 0;
+    z-index: 1;
+    width: 100vw;
+    height: 3rem;
+    background-color: $navbar_bg_color;
+
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+
+  > aside {
+    position: fixed;
+    top: 3rem;
     left: 0;
     bottom: 0;
     overflow-y: auto;
@@ -94,6 +98,7 @@ export default {
     margin-left: $navbar-width;
     height: 100vh;
     padding: 1rem;
+    padding-top: 3rem + 1rem;
   }
 
   > footer {
@@ -108,23 +113,32 @@ export default {
 
 @media (max-width: 768px) {
   .theme {
+    > header {
+      height: 25px;
+      z-index: 4;
+      border-bottom: 1px solid #960000;
+    }
+
     > aside {
       position: relative;
       top: 0;
       width: 100vw;
-      height: 85px;
+      height: 85px + 25px;
+      padding-top: 25px;
       z-index: 3;
       overflow: initial;
       border-top-right-radius: 0;
       border-bottom-left-radius: 10px;
       box-shadow: 0 5px 5px #960000;
 
+      display: flex;
+      justify-content: space-between;
     }
 
     > main {
       position: relative;
       margin-left: 0 !important;
-
+      padding-top: 1rem;
       // .page-theme {
         
       //   > div {

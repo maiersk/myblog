@@ -56,6 +56,7 @@ export default {
     width: 100vw;
     height: 50vh;
     padding-right: 15px;
+    z-index: 10;
 
     section {
       position: fixed;
@@ -92,7 +93,7 @@ export default {
 
   @media (max-width: 768px) {
     .modal {
-      z-index: 3;
+      z-index: 4;
       // section {
       // }
       .modal-body {

@@ -1,22 +1,22 @@
 <template>
-  <PageTheme>
+  <page-theme>
     <template #title>
       <h1>Blog</h1>
     </template>
     <template #body>
-      <blogList /> 
+      <list-blogs /> 
     </template>
-  </PageTheme>
+  </page-theme>
 </template>
 
 <script>
-import PageTheme from "../components/PageTheme";
-import blogList from '../components/blogList';
+import pageTheme from "../components/pageTheme";
+import listBlogs from '../components/listBlogs';
 
 export default {
   components: {
-    PageTheme,
-    blogList,
+    pageTheme,
+    listBlogs,
   },
 }
 </script>

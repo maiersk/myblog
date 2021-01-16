@@ -1,5 +1,5 @@
 <template>
-  <PageTheme>
+  <page-theme>
     <template #title>
       <h1>Home</h1>
     </template>
@@ -7,16 +7,16 @@
       <input type="button" value="add" @click="add" />
       {{state.count}}
     </template>
-  </PageTheme>
+  </page-theme>
 </template>
 
 <script>
 import { useStore } from "vuex";
-import PageTheme from "../components/PageTheme";
+import pageTheme from "../components/pageTheme";
 
 export default {
   components: {
-    PageTheme,
+    pageTheme,
   },
   setup() {
     const sotre = useStore();

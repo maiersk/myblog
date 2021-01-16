@@ -20,7 +20,7 @@
 
 <script>
 import { onMounted, reactive } from 'vue';
-import Modal from '../Modal';
+import Modal from '../BaseModal';
 import axios from '../../plugins/axios';
 
 export default {

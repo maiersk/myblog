@@ -1,11 +1,8 @@
 <template>
   <div class="nav_content">
-    <button class="c_a btn btn-theme bar_btn" @click="open()">
-      <faIcon :icon="['fa', 'bars']"></faIcon>
-    </button>
-    <div class="navbar" :class="bar_open ? 'nav_open' : ''">
+    <div class="navbar" :class="state.bar_open ? 'nav_open' : ''">
       <ul class="c_ul">
-        <li v-for="link in navlinks" :key="link" @click="open()">
+        <li v-for="link in navlinks" :key="link" @click="closeBar()">
           <router-link :to="link.path">
             <faIcon class="faicon" :icon="link.meta.icon" />
             <span>{{link.meta.title}}</span>
@@ -13,28 +10,31 @@
         </li>
       </ul>
     </div>
-    <section :class="bar_open ? 'nav_section' : ''"
-      @click="open()"
+    <section :class="state.bar_open ? 'nav_section' : ''"
+      @click="closeBar()"
     ></section>
   </div>
 </template>
 
 <script>
-import { ref } from 'vue'
+import { reactive } from 'vue'
+import { useStore } from 'vuex'
+
 export default {
   props: {
     navlinks: Array,
   },
   setup() {
-    const bar_open = ref(false);
+    const store = useStore()
+    const state = reactive(store.state)
 
-    const open = () => {
-      bar_open.value = !bar_open.value;
+    function closeBar() {
+      store.commit('navBarOpenOrClose')
     }
 
     return {
-      bar_open,
-      open,
+      state,
+      closeBar,
     }
   }
 }
@@ -47,10 +47,6 @@ export default {
     position: fixed;
     width: $navbar-width;
     margin-top: 10rem;
-
-    .bar_btn {
-      display: none;
-    }
 
     .nav_section {
       display: none;
@@ -103,14 +99,6 @@ export default {
       width: 100vw !important;
       margin-top: 0rem;
 
-      .bar_btn {
-        display: block;
-        width: 2.5rem;
-        height: 2.5rem;
-        margin: 1.5rem;
-        z-index: 3;
-      }
-
       .navbar {
         position: absolute;
         top: 0;
@@ -139,7 +127,7 @@ export default {
 
       .nav_open {
         overflow: hidden;
-        transform: translateY(42%);
+        transform: translateY(55%);
       }
 
       .nav_section {
