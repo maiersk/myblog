@@ -47,9 +47,9 @@ export default {
         method: 'get',
         url: '/oauth/'
       }).then((res) => {
-        if (res.data?.success && res.data[0]) {
+        if (res.data.success && res.data.data) {
           store.commit("setIsLogged", true)
-          store.dispatch("oauthUser", res.data[0])
+          store.dispatch("oauthUser", res.data.data)
         }
       }).catch((err) => {
         console.log(err);
@@ -64,7 +64,7 @@ export default {
         method: 'get',
         url: '/oauth/signout'
       }).then((res) => {
-        if (res.data?.success && res.data[0]) {
+        if (res.data.success && res.data.data) {
           store.commit("setIsLogged", false)
           store.dispatch("oauthUser", {})
           document.location = document.location.origin
@@ -114,8 +114,10 @@ export default {
 
   @media (max-width: 768px) {
     .container {
-      height: 100%;
+      width: 3rem;
+      height: 2rem;
       z-index: 3;
+      align-items: center;
       // .sign {
         
       // }

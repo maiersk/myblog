@@ -9,9 +9,9 @@
   <button v-else
     class="btn btn-theme"
     :class="btnClass"
-    :value="btnValue"
     @click="operate()"
   >
+    {{btnValue}}
     <slot name="add_dom"></slot>
   </button>
 </template>

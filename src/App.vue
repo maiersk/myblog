@@ -1,14 +1,22 @@
 <template>
   <div class="theme">
     <header>
+      <panel-presonal 
+        v-if="state.isLogged"
+        :name="state.user.name"
+        :avatar="state.user.avatar"
+        :option="{
+          avatarSize:[32,32],
+          vertical:false,
+        }"
+      />
       <panel-sign-btns />
-
     </header>
     <aside>
       <nav-bar-btn />
       <panel-presonal />
     </aside>
-    <nav-bar :navlinks="links" />
+    <panel-nav-bar :navlinks="links" />
 
     <main>
       <router-view></router-view>
@@ -22,8 +30,8 @@
 
 <script>
 import svgData from "./assets/bilibilisvgdata";
-import navBar from "./components/navBar";
 import navBarBtn from "./components/Buttons/navBarBtn";
+import panelNavBar from "./components/panelNavBar";
 import panelPresonal from "./components/panelPresonal";
 import panelAcIcon from "./components/panelAccountIcon";
 import panelSignBtns from './components/panelSignBtns';
@@ -31,14 +39,15 @@ import panelSignBtns from './components/panelSignBtns';
 export default {
   name: "App",
   components: {
-    navBar,
     navBarBtn,
+    panelNavBar,
     panelPresonal,
     panelAcIcon,
     panelSignBtns,
   },
   data() {
     return {
+      state: this.$store.state,
       moreinfo: { display: false, names: ["ABTTEX"] },
       links: [],
       acPages: [
@@ -114,17 +123,14 @@ export default {
 @media (max-width: 768px) {
   .theme {
     > header {
-      height: 25px;
-      z-index: 4;
-      border-bottom: 1px solid #960000;
+      display: none;
     }
 
     > aside {
       position: relative;
       top: 0;
       width: 100vw;
-      height: 85px + 25px;
-      padding-top: 25px;
+      height: 85px;
       z-index: 3;
       overflow: initial;
       border-top-right-radius: 0;
@@ -138,13 +144,15 @@ export default {
     > main {
       position: relative;
       margin-left: 0 !important;
-      padding-top: 1rem;
-      // .page-theme {
-        
-      //   > div {
+      padding: 0.5rem;
+      padding-top: 0.8rem;
+      
+      .page-theme {
+        padding: 0.25rem;
+        // > div {
           
-      //   }
-      // }
+        // }
+      }
     }
 
     > footer {

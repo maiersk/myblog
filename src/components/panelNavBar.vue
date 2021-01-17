@@ -9,6 +9,18 @@
           </router-link>
         </li>
       </ul>
+
+      <div class="sign_panel">
+        <panel-presonal v-if="state.isLogged"
+          :name="state.user?.name ?? 'none'"
+          :avatar="state.user?.avatar ?? ''"
+          :option="{
+            vertical: true,
+            avatarSize: [32,32],
+          }"
+        />
+        <panel-sign-btns />
+      </div>
     </div>
     <section :class="state.bar_open ? 'nav_section' : ''"
       @click="closeBar()"
@@ -19,8 +31,14 @@
 <script>
 import { reactive } from 'vue'
 import { useStore } from 'vuex'
+import panelPresonal from './panelPresonal'
+import panelSignBtns from './panelSignBtns'
 
 export default {
+  components: {
+    panelPresonal,
+    panelSignBtns,
+  },
   props: {
     navlinks: Array,
   },
@@ -46,7 +64,7 @@ export default {
   .nav_content {
     position: fixed;
     width: $navbar-width;
-    margin-top: 10rem;
+    margin-top: 13rem;
 
     .nav_section {
       display: none;
@@ -90,6 +108,10 @@ export default {
         }
       }
     }
+
+    .sign_panel {
+      display: none;
+    }
   }
 
   @media (max-width: 768px) {
@@ -97,8 +119,9 @@ export default {
       position: absolute;
       top: 0px;
       width: 100vw !important;
+      height: 100vh;
       margin-top: 0rem;
-
+      
       .navbar {
         position: absolute;
         top: 0;
@@ -109,7 +132,7 @@ export default {
         overflow: hidden;
         z-index: 2;
         padding-top: 0.9rem;
-        padding-bottom: 0.3rem;
+        padding-bottom: 0.5rem;
         
         ul {
           
@@ -126,12 +149,14 @@ export default {
       }
 
       .nav_open {
+        position: absolute;
         overflow: hidden;
-        transform: translateY(55%);
+        transform: translateY(0%);
+        top: 80px;
       }
 
       .nav_section {
-        position: absolute;
+        position: fixed;
         display: block;
         width: 100vw;
         height: 100vh;
@@ -141,6 +166,20 @@ export default {
 
         transition: all 0.5s ease-out;
       }
+
+      .sign_panel {
+        display: flex;
+        flex-flow: row;
+        align-items: center;
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+
+        > .presonal {
+          flex-flow: row !important;
+        }
+      }
+
     }
+
   }
 </style>
