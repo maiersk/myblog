@@ -25,6 +25,8 @@
     <footer>
       <panel-ac-icon :account_pages="acPages" />
     </footer>
+
+    <notification />
   </div>
 </template>
 
@@ -35,9 +37,13 @@ import panelNavBar from "./components/panelNavBar";
 import panelPresonal from "./components/panelPresonal";
 import panelAcIcon from "./components/panelAccountIcon";
 import panelSignBtns from './components/panelSignBtns';
+import useNotification from './utilities/mixins/useNotification';
 
 export default {
   name: "App",
+  mixins: [
+    useNotification,
+  ],
   components: {
     navBarBtn,
     panelNavBar,
@@ -101,6 +107,10 @@ export default {
     overflow-y: auto;
     background-color: $navbar_bg_color;
     width: $navbar-width;
+
+    .presonal {
+      margin-top: 1rem;
+    }
   }
   
   > main {
@@ -146,7 +156,7 @@ export default {
       margin-left: 0 !important;
       padding: 0.5rem;
       padding-top: 0.8rem;
-      
+
       .page-theme {
         padding: 0.25rem;
         // > div {

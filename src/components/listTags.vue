@@ -1,23 +1,27 @@
 <template>
   <div class="list_tags_div">
     <div class="add_tag">
-      <form ref="formRef" @submit.prevent="addTag()">
+      <form @submit.prevent="addTag()">
         <div>
           <label>Tag Name:</label>
-          <input type="text" id="tag_name">
+          <input type="text" id="tag_name" v-model="form.name">
         </div>
         <div>
           <label>Tag Color:</label>
-          <input type="color" id="tag_color">
+          <input type="color" id="tag_color" v-model="form.color">
         </div>
         <input class="btn btn-theme" type="submit" value="Add Tag">
       </form>
     </div>
     <div class="list_tags">
-      <ul class="c_ul" >
-        <li v-for="(tag, i) in tags" :key="i">
+      <ul class="c_ul">
+        <li v-for="(tag) in tags" :key="tag.id" :index="tag.id">
           <tag-btn :name="tag.name" :col="tag.color" />
-          <a class="c_a"><faIcon :icon="['fas','times']" size="1x"></faIcon></a>
+          <a class="c_a del_Tag"
+            @click="delTag(tag.id)"
+          >
+            <faIcon :icon="['fas','times']" size="1x"></faIcon>
+          </a>
         </li>
       </ul>
     </div>
@@ -34,7 +38,11 @@ export default {
   },
   data() {
     return {
-      tags: []
+      tags: [],
+      form: {
+        name: null,
+        color: null,
+      },
     }
   },
   beforeCreate() {
@@ -49,9 +57,40 @@ export default {
   },
   methods: {
     addTag() {
-      const addform = this.$refs.formRef
-      console.log(addform);
+      this.$root.openNotifi(false, 'test notifi')
+      console.log(this.$root)
+
+      if (this.form.name && this.form.color) {
+        axios({
+          method: 'post',
+          url: '/tags/',
+          data: this.form,
+        }).then((res) => {
+          if (res.data.success) {
+            console.log(res.data);
+            this.notifi = {
+              message: 'test',
+              success: true
+            }
+          }
+        }).catch((err) => {
+          console.log(err)
+        })
+      }
     },
+    delTag(id) { 
+
+      axios({
+        method: 'delete',
+        url: `/tags/${id}`,
+      }).then((res) => {
+        if (res.data.success) { 
+          this.tags = this.tags.filter((tag) => {return tag.id !== id})
+        }
+      }).catch((err) => {
+        console.log(err)
+      })
+    }
   }
 }
 </script>
@@ -67,11 +106,12 @@ export default {
         flex-direction: row;
         align-items: center;
 
-        a {
+        .del_Tag {
+          cursor: pointer;
           text-align: center;
-        }
-        .tag_div {
-          
+          margin-top: auto;
+          margin-bottom: auto;
+          color: #990000;
         }
       }
     }
