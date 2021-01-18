@@ -9,18 +9,15 @@ const store = createStore({
     }
   },
   mutations: {
-    add(state) {
-      state.count++;
-    },
-    navBarOpenOrClose(state) {
-      state.bar_open = !state.bar_open
-    },
     setUser(state, payload) {
       state.user = payload
     },
     setIsLogged(state, payload) {
       state.isLogged = payload
-    }
+    },
+    navBarOpenOrClose(state) {
+      state.bar_open = !state.bar_open
+    },
   },
   actions: {
     oauthUser({commit}, payload) {

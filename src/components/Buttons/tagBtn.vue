@@ -3,9 +3,7 @@
     <base-button 
       btnClass="tag_btn"
       btnValue=""
-      :style="'background-color: rgba' +
-        `(${col[0]}, ${col[1]}, ${col[2]}, ${col[3]})`
-      "
+      :style="`background-color: ${col}`"
     >
       <template #add_dom>
         <span>{{name}}</span>
@@ -24,10 +22,8 @@ export default {
       default: 'Tag'
     },
     col: {
-      type: Array,
-      default() {
-        return [255, 255, 255, 255]
-      }
+      type: String,
+      default: '#ffffff'
     }
   },
   components: {
