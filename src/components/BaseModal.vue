@@ -36,9 +36,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .fade-enter-active {
-    transition: all 0.3s cubic-bezier(0.5, 0.5, 0.8, 0.5);
-  }
   .fade-enter-active,
   .fade-leave-active {
     transition: all 0.3s ease;
