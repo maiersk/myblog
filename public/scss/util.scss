@@ -98,6 +98,7 @@
 
 .input_select {
   @extend .input_text;
+  cursor: pointer;
 }
 
 
@@ -119,12 +120,12 @@
 
   > label {
     text-align: center;
-    margin-left: auto;
-    margin-right: auto;
+    min-width: 100px;
+    width: 300px;
   }
   > input,
   > select {
-    margin-right: auto;
+    width: 100%;
   }
 }
 
