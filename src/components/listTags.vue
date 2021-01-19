@@ -142,10 +142,7 @@ export default {
           }
         }).catch((err) => {
           this.$root.openNotifi(false, err.message)
-        }).finally(() => {
-          this.$refs.selectRef.value = ''
-          this.form = {id: null, name: null, color: null}
-        })
+        }).finally(this.clearFrom)
       }
     },
     delTag() {
@@ -162,11 +159,12 @@ export default {
           }
         }).catch((err) => {
           this.$root.openNotifi(false, err.message)
-        }).finally(() => {
-          this.$refs.selectRef.value = ''
-          this.form = {id: null, name: null, color: null}
-        })
+        }).finally(this.clearFrom)
       }
+    },
+    clearFrom() {
+      this.$refs.selectRef.value = ''
+      this.form = {id: null, name: null, color: null}
     }
   }
 }
@@ -176,10 +174,8 @@ export default {
 @import "../../public/scss/global.scss";
 
 .admin_panel {
-  margin: 0.5rem;
+  margin-top: 0.5rem;
   flex-grow: 1;
-  min-width: 300px;
-  max-width: 400px;
 }
 // .add_tag {
 // }
@@ -187,7 +183,7 @@ export default {
 //   @extend .add_tag;
 // }
 .list_tags {
-  margin: 0.5rem;
+  margin-top: 0.5rem;
   border: 1px solid #303030;
   background-color: #202020;
 }
