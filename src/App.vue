@@ -116,6 +116,12 @@ export default {
     margin-left: $navbar-width;
     padding: 1rem;
     padding-top: 3rem + 1rem;
+    min-height: 100vh;
+    max-height: 100%;
+
+    // 使用flex布局使page组件使用剩余高度
+    display: flex;
+    flex-direction: column;
   }
 
   > footer {

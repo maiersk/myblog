@@ -31,8 +31,9 @@ export default {
 <style lang="scss" scoped>
   .page-theme {
     height: 100%;
-    padding: 0.5rem;
+    padding: 0.25rem;
     border-radius: 5px;
+    flex-grow: 1; //使用剩余高度
 
     .title_div {
       background-color: #282828;
@@ -53,7 +54,7 @@ export default {
     }
     
     > main {
-      margin: 0.5rem;
+      margin: 0.25rem;
     }
     > div {
       @extend main;
