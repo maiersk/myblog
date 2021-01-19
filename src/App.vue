@@ -71,7 +71,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import "../public/scss/global.scss";
+@import "../public/scss/theme.scss";
 
 * {
   margin: 0;
@@ -80,7 +80,7 @@ export default {
 }
 
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: Roboto, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -92,7 +92,6 @@ export default {
     z-index: 1;
     width: 100vw;
     height: 3rem;
-    background-color: $navbar_bg_color;
 
     display: flex;
     justify-content: flex-end;
@@ -115,7 +114,6 @@ export default {
   
   > main {
     margin-left: $navbar-width;
-    height: 100vh;
     padding: 1rem;
     padding-top: 3rem + 1rem;
   }
@@ -145,10 +143,15 @@ export default {
       overflow: initial;
       border-top-right-radius: 0;
       border-bottom-left-radius: 10px;
-      box-shadow: 0 5px 5px #960000;
+      border-bottom-right-radius: 10px;
+      box-shadow: 0 5px 5px $c_red;
 
       display: flex;
       justify-content: space-between;
+
+      .presonal {
+        margin-top: 0;
+      }
     }
 
     > main {

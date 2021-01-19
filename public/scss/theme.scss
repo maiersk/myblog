@@ -1,0 +1,107 @@
+@import "./global.scss";
+@import "./util.scss";
+
+body { background-color: $main_bg_color;}
+.theme {
+  color: white;
+
+  > header {
+    background-color: $c_second;
+  }
+
+  > aside {
+    box-shadow: 5px 0px 5px $navbar_bg_shadow_color;
+    
+  }
+
+  > main {
+    background-color: $main_bg_color;
+
+    .page-theme {
+      background: $main_page_bg_color;
+      
+      .path {
+        .faicon {
+          color: $navbar_bg_color;
+        }
+      }
+      // > main {
+
+      // }
+    }
+  }
+
+  // > footer {
+
+  // }
+}
+
+// button theme
+.btn-theme {
+  background-color: black;
+  border-color: $border_color;
+  color: $navbar_bg_color;
+  font-weight: bold;
+  outline: none;
+  position: relative;
+  transition: all 0.3s ease;
+}
+.btn-theme:disabled {
+  background-color: #3d3d3d;
+}
+.btn-theme:hover:not(:disabled) {
+  background-color: #2d2d2d;
+  color: white;
+}
+// .btn-theme:active {
+// }
+
+// input_text theme
+.input_text {
+  background-color: #202020;
+  color: #a3a3a3;
+}
+.input_text:hover,
+.input_text:focus {
+  box-shadow: 0 0 0 1px #2d2d2d;
+  background-color: #2d2d2d;
+}
+
+// form theme
+// form
+.form-flex {
+  border: 1px solid #303030;
+  background-color: #202020;
+}
+.form-group {
+  
+  // > label {
+    
+  // }
+}
+
+// modal theme
+.modal-theme {
+  color: white;
+  background-color: $modal_bg_color !important;
+
+  h1 {
+    text-align: center;
+    border: 1px solid $border_color;
+    border-bottom-color: $navbar_bg_color;
+  }
+  // main {
+  //   h2 {
+      
+  //   }
+  //   .login_content {
+
+  //   }
+  // }
+  a {
+    color: $navbar_bg_color;
+  }
+  a:hover {
+    color: white;
+  }
+}

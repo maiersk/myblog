@@ -1,9 +1,13 @@
-@import "./util.scss";
+$c_main: #ff8438;
+$c_second: #ffb245;
+$c_green: #29b37f;
+$c_blue: #2978ad;
+$c_red: #ff5029;
 
 $navbar-width: 262px;
-$navbar_bg_color: #ff8438;
+$navbar_bg_color: $c_main;
 $navbar_txt_color: white;
-$navbar_bg_shadow_color: #960000;
+$navbar_bg_shadow_color: $c_red;
 
 $main_bg_color: #151515;
 $main_page_bg_color: #232323;
@@ -12,82 +16,3 @@ $main_page_el_color: #282828;
 $modal_bg_color: $main_page_bg_color;
 
 $border_color: #303030;
-
-body { background-color: $main_bg_color;}
-.theme {
-  color: white;
-  > aside {
-    border-radius: 10px;
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-    box-shadow: 5px 0px 5px $navbar_bg_shadow_color;
-    
-  }
-
-  > main {
-    background-color: $main_bg_color;
-
-    .page-theme {
-      background: $main_page_bg_color;
-      
-      .path {
-        .faicon {
-          color: $navbar_bg_color;
-        }
-      }
-      > main {
-        background-color: $main_page_el_color;
-        border: 1px solid $border_color;
-        border-radius: 2px;
-      }
-      > div {
-        @extend main;
-      }
-    }
-  }
-
-  // > footer {
-
-  // }
-}
-
-.btn-theme {
-  background-color: black;
-  border-color: $border_color;
-  color: $navbar_bg_color;
-  font-weight: bold;
-  outline: none;
-  position: relative;
-  transition: all 0.3s ease;
-}
-.btn-theme:hover {
-  background-color: #2d2d2d;
-  color: white;
-}
-// .btn-theme:active {
-// }
-
-.modal-theme {
-  color: white;
-  background-color: $modal_bg_color !important;
-
-  h1 {
-    text-align: center;
-    border: 1px solid $border_color;
-    border-bottom-color: $navbar_bg_color;
-  }
-  // main {
-  //   h2 {
-      
-  //   }
-  //   .login_content {
-
-  //   }
-  // }
-  a {
-    color: $navbar_bg_color;
-  }
-  a:hover {
-    color: white;
-  }
-}
