@@ -1,12 +1,12 @@
 <template>
   <div class="page-theme">
-    <div class="title_div">
+    <div class="container title_div">
       <div class="path">
         <faIcon class="faicon" :icon="icon"></faIcon>
       </div> 
       <slot name="title">Page Title</slot>
     </div>
-    <main>
+    <main class="container">
       <slot name="body">Page Body</slot>
     </main>
   </div>
@@ -53,11 +53,10 @@ export default {
       text-align: left;
     }
     
-    > main {
-      margin: 0.25rem;
-    }
-    > div {
-      @extend main;
-    }
+    // > main {
+    // }
+    // > div {
+    //   @extend main;
+    // }
   }
 </style>
