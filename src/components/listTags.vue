@@ -1,7 +1,7 @@
 <template>
   <div class="list_tags_div">
     <div class="admin_panel" v-if="adminmode">
-      <div class="div_title">
+      <div class="list_header">
         Tag Admin
       </div>
       <form class="form-flex">
@@ -50,7 +50,7 @@
       </form>
     </div>
     <div class="list_tags">
-      <div class="div_title">
+      <div class="list_header">
         Tag List
       </div>
       <ul class="c_ul">
@@ -188,12 +188,35 @@ export default {
   background-color: #202020;
 }
 
-.div_title {
+.list_header {
   padding: 0.5rem;
-  background-color: $c_red;
+  background-color: $c_second;
   font-weight: 700;
   border-top-left-radius: 2px;
   border-top-right-radius: 2px;
+  
+  display: flex;
+  justify-content: space-between;
+
+  .list_operate {
+    max-width: 200px;
+    min-width: 100px;
+    display: flex;
+
+    > a {
+      text-align: center;
+      flex-grow: 1;
+      > svg {
+        width: 16px;
+        height: 16px;
+        transition: 1s ease;
+
+      }
+      > svg:hover {
+        color: white;
+      }
+    } 
+  }
 }
 
 .list_tags {
@@ -210,8 +233,8 @@ export default {
 }
 
 @media (max-width: 768px) {
-  .admin_panel {
+  // .admin_panel {
 
-  }
+  // }
 }
 </style>
