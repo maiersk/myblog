@@ -1,5 +1,5 @@
 <template>
-  <div class="list_tags_div">
+  <!-- <div class="list_tags_div">
     <div class="admin_panel" v-if="adminmode">
       <div class="list_header">
         Tag Admin
@@ -18,30 +18,30 @@
         <div class="form-group">
           <label>Tag Name:</label>
           <input type="text" class="input_text" 
-            id="tag_name" v-model="form.name"
+            id="tag_name" v-model="model.name"
           />
         </div>
         <div class="form-group">
           <label>Tag Color:</label>
           <input type="color" class="input_col"
-            id="tag_color" v-model="form.color"
+            id="tag_color" v-model="model.color"
           />
         </div>
         <div class="btns block-center">
           <button class="btn btn-theme text-c-green"
-            :disabled="!form.id ? false : true"
+            :disabled="!model.id ? false : true"
             @click.prevent="addTag()"
           >
             Add Tag
           </button>
           <button class="btn btn-theme text-c-blue"
-            :disabled="form.id ? false : true"
+            :disabled="model.id ? false : true"
             @click.prevent="editTag()"
           >
             Edit Tag
           </button>
           <button class="btn btn-theme text-c-red"
-            :disabled="form.id ? false : true"
+            :disabled="model.id ? false : true"
             @click.prevent="delTag()"
           >
             Delete Tag
@@ -60,22 +60,76 @@
         </li>
       </ul>
     </div>
-  </div>
+  </div> -->
+  <base-list name="Tags" url="/tags">
+
+    <template v-slot:List="l_props">
+      <ul class="c_ul flex">
+        <span class="m-1 block-center" v-if="!l_props.list.length">no tag</span>
+        <li v-for="tag in l_props.list" :key="tag.id">
+          <tag-btn :name="tag.name" :col="tag.color"></tag-btn>
+        </li>
+      </ul>
+    </template>
+
+    <template v-slot:createModel>
+      <div class="form-group">
+        <label>Tag Name:</label>
+        <input type="text" class="input_text" 
+          id="tag_name" v-model="model.name"
+        />
+      </div>
+      <div class="form-group">
+        <label>Tag Color:</label>
+        <input type="color" class="input_col"
+          id="tag_color" v-model="model.color"
+        />
+      </div>
+    </template>
+    <template v-slot:editModel>
+      <div class="form-group">
+        <label>Tag Name:</label>
+        <input type="text" class="input_text"
+          id="tag_name" v-model="model.name"
+        />
+      </div>
+      <div class="form-group">
+        <label>Tag Color:</label>
+        <input type="color" class="input_col"
+          id="tag_color" v-model="model.color"
+        />
+      </div>
+    </template>
+    <template v-slot:deleteModel>
+      <div></div>
+    </template>
+  </base-list>
 </template>
 
 <script>
 import axios from '../plugins/axios'
 import tagBtn from './Buttons/tagBtn'
+import BaseList from './BaseList'
+import { computed } from 'vue'
 
 export default {
   components: {
-    tagBtn
+    tagBtn,
+    BaseList
+  },
+  provide() {
+    return {
+      model: computed({
+        set: (val) => {this.model = val},
+        get: () => {return this.model}
+      })
+    }
   },
   data() {
     return {
       adminmode: true,
       tags: [],
-      form: {
+      model: {
         id: null,
         name: null,
         color: null,
@@ -97,7 +151,7 @@ export default {
       })
     },
     addTag() {
-      if (this.form.name && this.form.color) {
+      if (this.model.name && this.model.color) {
         axios({
           method: 'post',
           url: '/tags/',
@@ -129,7 +183,7 @@ export default {
     },
     editTag() {
       if (this.form?.id ?? false) {
-        const id = this.form.id
+        const id = this.model.id
 
         axios({
           method: 'put',
@@ -147,7 +201,7 @@ export default {
     },
     delTag() {
       if (this.form?.id ?? false) {
-        const id = this.form.id
+        const id = this.model.id
 
         axios({
           method: 'delete',

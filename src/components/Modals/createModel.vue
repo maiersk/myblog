@@ -8,16 +8,31 @@
         <slot name="body">
           something
         </slot>
+
+        <div class="btns block-center">
+          <button class="btn btn-theme text-c-green"
+            @click.prevent="this.$emit('isClick')"
+          >
+            Add {{name}}
+          </button>
+        </div>
       </form>
     </template>
   </Modal>
 </template>
 
 <script>
-import { computed } from 'vue';
+import { computed } from 'vue'
 import Modal from '../BaseModal'
 
 export default {
+  emits: {
+    isClick: null,
+    selectId: null,
+  },
+  components: {
+    Modal,
+  },
   provide() {
     return {
       isOpen: computed({
@@ -26,7 +41,7 @@ export default {
       })
     }
   },
-  inject: ['modal'],
+  inject: ['strModal', 'objModel', 'list'],
   props: {
     name: {
       type: String,
@@ -43,7 +58,7 @@ export default {
     }
   },
   watch: {
-    modal: {
+    strModal: {
       deep: true,
       handler(val) {
         if (val.value === this.modalName) {
@@ -55,14 +70,19 @@ export default {
       deep: true,
       handler(val) {
         if (val === false) {
-          this.modal.value = ''
+          this.strModal.value = ''
         }
       }
-    }
+    },
   },
-  components: {
-    Modal,
-  },
+  methods: {
+    // 给editModel和delModel使用
+    selectId() {
+      const selectRef = this.$refs.selectRef
+      const id = selectRef.selectedOptions[0].getAttribute('id')
+      this.$emit('selectId', id)
+    },
+  }
 };
 </script>
 

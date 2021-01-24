@@ -10,6 +10,7 @@ export function axiosReq(option) {
     _axios({
       method: option.method,
       url: option.url,
+      data: option.data,
     }).then((res) => {
       if (res.data.success && res.data.data) {
         resolve(res.data.data)

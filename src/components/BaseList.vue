@@ -27,26 +27,43 @@
         </slot>
       </div>
       <slot name="List" :list="list">
-        <ul v-for="item in list" :key="item.id">
-          <slot name="c_item" :item="item">
-            {{item.name}}
-          </slot>
+        <ul class="c_ul flex">
+          <span class="m-1 block-center" v-if="!list.length">no item</span>
+          <li v-for="item in list" :key="item.id">
+            <slot name="c_item" :item="item">
+              {{item.name}}
+            </slot>
+          </li>
         </ul>
       </slot>
     </div>
 
     <teleport to="body">
       <create-model v-show="select_modal === 'create'"
-        name="Base" modalName="create"
+        :name="name" modalName="create"
+        @isClick="add()"
       >
+        <template #body>
+          <slot name="createModel"></slot>
+        </template>
       </create-model>
       <edit-model v-show="select_modal === 'edit'"
-        name="Base" modalName="edit"
+        :name="name" modalName="edit"
+        @selectId="select($event)"
+        @isClick="edit()"
       >
+        <template #body>
+          <slot name="editModel"></slot>
+        </template>
       </edit-model>
       <del-model v-show="select_modal === 'del'"
-        name="Base" modalName="del"
+        :name="name" modalName="del"
+        @selectId="select($event)"
+        @isClick="del()"
       >
+        <template #body>
+          <slot name="deleteModel"></slot>
+        </template>
       </del-model>
     </teleport>
   </div>
@@ -65,12 +82,15 @@ export default {
     editModel,
     delModel,
   },
+  inject: ['model'],
   provide() {
     return {
-      modal: computed({
+      strModal: computed({
         set: (val) => {this.select_modal = val},
         get: () => {return this.select_modal}
-      })
+      }),
+      objModel: computed(() => {return this.model}),
+      list: computed(() => {return this.list})
     }
   },
   props: {
@@ -87,10 +107,10 @@ export default {
     return {
       select_modal: '',
       list: [],
-      model: {
-
-      },
     }
+  },
+  created() {
+    this.getAll()
   },
   methods: {
     openModal(name) {
@@ -106,21 +126,21 @@ export default {
         this.$root.openNotifi(false, err.message)
       })
     },
-    select: (id) => {
+    select(id) {
       axiosReq({
         method: 'get',
         url: `${this.url}/${id}`,
       }).then((res) => {
-        this.model = res
+        this.model.value = res
       }).catch((err) => {
         this.$root.openNotifi(false, err.message)
       })
     },
-    add: () => {
+    add() {
       axiosReq({
         method: 'post',
         url: this.url,
-        data: this.model,
+        data: this.model.value,
       }).then((res) => {
         this.list.push(res)
         this.$root.openNotifi(true, 'create success')
@@ -128,27 +148,36 @@ export default {
         this.$root.openNotifi(false, err.message)
       })
     },
-    edit: (id) => {
-      axiosReq({
-        method: 'put',
-        url: `${this.url}/${id}`,
-      }).then(() => {
-        this.getAll()
-        this.$root.openNotifi(true, 'edit success')
-      }).catch((err) => {
-        this.$root.openNotifi(false, err.message)
-      })
+    edit() {
+      if (this.model.value?.id ?? false) {
+        const id = this.model.value.id
+        console.log(this.model.value);
+        axiosReq({
+          method: 'put',
+          url: `${this.url}/${id}`,
+          data: this.model.value,
+        }).then(() => {
+          this.getAll()
+          this.$root.openNotifi(true, 'edit success')
+        }).catch((err) => {
+          this.$root.openNotifi(false, err.message)
+        })
+      }
     },
-    del: (id) => {
-      axiosReq({
-        method: 'delete',
-        url: `${this.url}/${id}`,
-      }).then(() => {
-        this.list = this.list.filter((item) => { return item.id !== id })
-        this.$root.openNotifi(true, 'delete success')
-      }).catch((err) => {
-        this.$root.openNotifi(false, err.message)
-      })
+    del() {
+      if (this.model.value?.id ?? false) {
+        const id = this.model.value.id
+
+        axiosReq({
+          method: 'delete',
+          url: `${this.url}/${id}`,
+        }).then(() => {
+          this.list = this.list.filter((item) => { return item.id !== id })
+          this.$root.openNotifi(true, 'delete success')
+        }).catch((err) => {
+          this.$root.openNotifi(false, err.message)
+        })
+      }
     }
   }
 }
