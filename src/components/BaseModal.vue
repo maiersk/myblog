@@ -71,7 +71,8 @@ export default {
       top: 0;
       left: 0;
       right: 0;
-      width: 30vw;
+      min-width: 50vw;
+      max-width: 30vw;
       margin-top: 1.75rem;
       margin-left: auto;
       margin-right: auto;
@@ -94,7 +95,8 @@ export default {
       // section {
       // }
       .modal-body {
-        width: 90vw;
+        min-width: 80vw;
+        max-width: 90vw;
         // main {
           
         // }
