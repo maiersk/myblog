@@ -8,9 +8,7 @@ const _axios = axios.create({
 export function axiosReq(option) {
   return new Promise((resolve, reject) => {
     _axios({
-      method: option.method,
-      url: option.url,
-      data: option.data,
+      ...option
     }).then((res) => {
       if (res.data.success && res.data.data) {
         resolve(res.data.data)
