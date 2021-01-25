@@ -1,6 +1,6 @@
 <template>
   <div class="tag_div">
-    <base-button 
+    <base-button type="a"
       btnClass="tag_btn"
       btnValue=""
       :style="`background-color: ${col}`"
@@ -24,7 +24,7 @@ export default {
     col: {
       type: String,
       default: '#ffffff'
-    }
+    },
   },
   components: {
     BaseButton
@@ -33,12 +33,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .tag_div {
-    .tag_btn {
+.tag_div {
+  > .tag_btn {
+    margin: 0.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-      span {
-        mix-blend-mode: difference;
-      }
+    span {
+      mix-blend-mode: difference;
     }
   }
+}
 </style>
