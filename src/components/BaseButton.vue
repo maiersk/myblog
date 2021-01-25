@@ -6,6 +6,14 @@
     :value="btnValue"
     @click="operate()"
   />
+  <a v-else-if="type === 'a'"
+    class="btn btn-theme"
+    :class="btnClass"
+    @click="operate()"
+  >
+    {{btnValue}}
+    <slot name="add_dom"></slot>
+  </a>
   <button v-else
     class="btn btn-theme"
     :class="btnClass"
@@ -24,7 +32,7 @@ export default {
       default: ''
     },
     btnValue: String,
-    btnClass: String
+    btnClass: String,
   },
   data() {
     return {
