@@ -21,7 +21,6 @@
 
         <div class="btns block-center">
           <button class="btn btn-theme text-c-blue"
-            :disabled="objModel.id ? true : false"
             @click.prevent="this.$emit('isClick')"
           >
             Edit {{name}}

@@ -29,6 +29,7 @@ export default {
   emits: {
     isClick: null,
     selectId: null,
+    clean: null,
   },
   components: {
     Modal,
@@ -70,7 +71,7 @@ export default {
       deep: true,
       handler(val) {
         if (val === false) {
-          this.strModal.value = ''
+          this.strModal.value = '' 
         }
       }
     },
@@ -81,6 +82,9 @@ export default {
       const selectRef = this.$refs.selectRef
       const id = selectRef.selectedOptions[0].getAttribute('id')
       this.$emit('selectId', id)
+      if (id === "-1") {
+        this.$emit('clean')
+      }
     },
   }
 };
