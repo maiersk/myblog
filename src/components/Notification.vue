@@ -59,6 +59,7 @@ export default {
     position: fixed;
     right: 0;
     bottom: 5rem;
+    z-index: 1000;
 
     background-color: $notifi_bg_col;
 
