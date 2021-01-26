@@ -1,5 +1,5 @@
 <template>
-  <base-list name="Tags" url="/tags">
+  <base-list name="Tags" url="/tags" :selectItems="true">
     <template #c_item="d">
       <tag-btn :name="d.item.name" :col="d.item.color"></tag-btn>
     </template>
@@ -48,6 +48,14 @@ export default {
     tagBtn,
     BaseList
   },
+  props: {
+    tags: {
+      type: Array,
+      default() {
+        return []
+      }
+    }
+  },
   provide() {
     return {
       model: computed({
@@ -56,6 +64,12 @@ export default {
         }},
         get: () => {return this.model}
       }),
+      // 用于v-model绑定选中的标签
+      selectModels: computed({
+        // v-model编译后是使用input事件改变值的，只需要emit到父组件即可
+        set: (val) => {this.$emit('input:tags', val)},
+        get: () => {return this.tags}
+      })
     }
   },
   data() {

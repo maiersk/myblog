@@ -18,7 +18,7 @@
       <div class="form-group">
         <label>Post tags:</label>
         <div class="input_div">
-          <list-tags></list-tags>
+          <list-tags v-model:tags="model.tags"></list-tags>
         </div>
       </div>
       <div class="form-group">
@@ -38,7 +38,7 @@
       <div class="form-group">
         <label>Post tags:</label>
         <div class="input_div">
-          <list-tags></list-tags>
+          <list-tags v-model:tags="model.tags"></list-tags>
         </div>
       </div>
       <div class="form-group">
@@ -65,6 +65,14 @@ export default {
     listTags,
     BaseList
   },
+  props: {
+    posts: {
+      type: Array,
+      default() {
+        return []
+      }
+    }
+  },
   provide() {
     return {
       model: computed({
@@ -73,15 +81,14 @@ export default {
         }},
         get: () => {return this.model}
       }),
-      selectModel: computed({
-        set: (val) => {this.tags = val},
-        get: () => {return this.tags}
-      })
+      selectModels: computed({
+        set: (val) => {this.$emit('input:posts', val)},
+        get: () => {return this.posts || []}
+      }),
     }
   },
   data() {
     return {
-      tags: [],
       model: {
         id: null,
         title: null,
@@ -93,14 +100,6 @@ export default {
   methods: {
     
   },
-  // watch: {
-  //   'model.tags': {
-  //     deep: true,
-  //     handler(val) {
-  //       console.log(val)
-  //     }
-  //   }
-  // }
 }
 </script>
 
