@@ -11,7 +11,7 @@ export function axiosReq(option) {
       ...option
     }).then((res) => {
       if (res.data.success && res.data.data) {
-        resolve(res.data.data)
+        resolve(res.data)
       }
     }).catch((err) => {
       reject(err)
