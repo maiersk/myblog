@@ -91,10 +91,12 @@ export default {
 
   @media (max-width: 768px) {
     .modal {
+      position: absolute;
       z-index: 4;
       // section {
       // }
       .modal-body {
+        position: absolute;
         min-width: 80vw;
         max-width: 90vw;
         // main {
