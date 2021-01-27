@@ -25,23 +25,48 @@
         </div>
       </slot>
     </div>
-    <slot name="List" :list="list">
+    <slot name="List" :list="list.data">
       <ul class="ul_list c_ul flex flex-warp">
-        <span class="m-1 block-center" v-if="!list.length">no item</span>
-        <li v-for="(item, i) in list" :key="item.id">
-          <input type="checkbox" :id="`${name}_select_${i}`"
+        <span class="m-1 block-center" v-if="!list.data?.length">no item</span>
+        <li v-for="item in list.data" :key="item.id">
+          <input type="checkbox" :id="`${name}_select_${item.id}`"
             :ref="`${name}_selectRef_${item.id}`"
             @change="select_item(item.id)"
             :checked="selectModels.value.includes(item.id)"
           >
-          <label :for="selectItems ? `${name}_select_${i}` : ''">
+          <label :for="options.selectItems ? `${name}_select_${item.id}` : ''">
             <slot name="c_item" :item="item">
               {{item.name}}
-            </slot>  
+            </slot>
           </label>
         </li>
       </ul>
     </slot>
+
+    <!-- 列表分页 -->
+    <div class="page_btn flex justify-center align-center" 
+      v-if="options.paging && list.data?.length"
+    >
+      <base-btn class="prev_btn" btnValue="Prev"
+        :disabled="page === 0 ? true : false"
+        @click.prevent="prevPage()"
+      ></base-btn>
+      <ul class="c_ul flex" v-if="list?.total_pages ?? false">
+        <li v-for="i in pagelist[pagelistidx]" :key="i">
+          <base-btn
+            btnClass="p_btn" :btnValue="''+i"
+            :disabled="page === i - 1 ? true : false"
+            @click.prevent="selectPage(i - 1)"
+          >
+          </base-btn>
+        </li>
+      </ul>
+      <span>page: {{page + 1}}</span>
+      <base-btn class="next_btn" btnValue="Next"
+        :disabled="page === list.total_pages ? true : false"
+        @click.prevent="nextPage()"
+      ></base-btn>
+    </div>
   </div>
 
   <teleport to="body">
@@ -81,12 +106,14 @@ import {axiosReq} from '../plugins/axios'
 import createModel from './Modals/createModel'
 import editModel from './Modals/editModel'
 import delModel from './Modals/delModel'
+import BaseBtn from './BaseButton'
 
 export default {
   components: {
     createModel,
     editModel,
     delModel,
+    BaseBtn,
   },
   props: {
     name: {
@@ -97,10 +124,17 @@ export default {
       type: String,
       default: '/'
     },
-    selectItems: {
-      type: Boolean,
-      default: false 
-    }
+    options: {
+      type: Object,
+      default() {
+        return {
+          selectItems: false,
+          paging: false,
+          pagecount: 5,
+          count: 10,
+        }
+      }
+    },
   },
   inject: ['model', 'selectModels'],
   provide() {
@@ -110,13 +144,16 @@ export default {
         get: () => {return this.select_modal}
       }),
       objModel: computed(() => {return this.model}),
-      list: computed(() => {return this.list})
+      list: computed(() => {return this.list.data})
     }
   },
   data() {
     return {
       select_modal: '',
-      list: [],
+      list: {},
+      page: 0,
+      pagelist: [],
+      pagelistidx: 0,
     }
   },
   created() {
@@ -145,12 +182,52 @@ export default {
         _selModels.value.splice(_selModels.value.indexOf(id), 1)
       }
     },
+    initPage() {
+      if (this.pagelist.length) this.pagelist = []
+      if (!this.list.total_pages) return
+      let arr = new Array(this.list.total_pages + 1)
+        .fill().map((_, i) => {return i+1})
+
+      arr.some(() => {
+        this.pagelist.push(arr.splice(0, this.options.pagecount))
+      })
+      if (arr.length !== 0) {
+        this.pagelist.push(arr)
+      }
+    },
+    selectPage(i) {
+      this.page = i
+      this.getAll()
+    },
+    prevPage() {
+      if (this.page <= 0) return
+      if (this.page % this.options.pagecount === 0) {
+        this.pagelistidx -= 1
+      }
+      this.page -= 1
+      this.getAll()
+    },
+    nextPage() {
+      if (this.page >= this.list.total_pages) return
+      if ((this.page + 1) % this.options.pagecount === 0) {
+        this.pagelistidx += 1
+      }
+      this.page += 1
+      this.getAll()
+    },
     getAll() {
+      let url = this.url
+      const {paging, count} = this.options
+      if (paging) {
+        url = `${this.url}?page=${this.page}&count=${count ? count : 10}`
+      }
+
       axiosReq({
         method: 'get',
-        url: this.url,
+        url,
       }).then((res) => {
         this.list = res
+        this.initPage()
       }).catch((err) => {
         this.$root.openNotifi(false, err.message)
       })
@@ -159,8 +236,8 @@ export default {
       axiosReq({
         method: 'get',
         url: `${this.url}/${id}`,
-      }).then((res) => {
-        this.model.value = res
+      }).then(({ data }) => {
+        this.model.value = data
       }).catch((err) => {
         this.$root.openNotifi(false, err.message)
       })
@@ -170,8 +247,8 @@ export default {
         method: 'post',
         url: this.url,
         data: this.model.value,
-      }).then((res) => {
-        this.list.push(res)
+      }).then(({ data }) => {
+        this.list.data.push(data)
         this.cleanModel()
         this.$root.openNotifi(true, 'create success')
       }).catch((err) => {
@@ -203,7 +280,7 @@ export default {
           method: 'delete',
           url: `${this.url}/${id}`,
         }).then(() => {
-          this.list = this.list.filter((item) => { return item.id !== id })
+          this.list.data = this.list.data.filter((item) => { return item.id !== id })
           this.cleanModel()
           this.$root.openNotifi(true, 'delete success')
         }).catch((err) => {
@@ -242,6 +319,33 @@ export default {
       }
     }
   }
+
+  .page_btn {
+    ul {
+      flex-shrink: 1;
+
+      li {
+        .p_btn {
+          width: 2rem;
+          height: 2rem;
+        }
+      }
+    }
+    > span {
+      display: none;
+    }
+    .prev_btn {
+      width: 2rem;
+      height: 2rem;
+      font-size: 10px;
+      font-weight: normal;
+      flex-shrink: 1;
+    }
+
+    .next_btn {
+      @extend .prev_btn;
+    }
+  }
 }
 
 .list_header {
@@ -256,7 +360,7 @@ export default {
 
   .list_operate {
     max-width: 200px;
-    min-width: 100px;
+    min-width: 150px;
     display: flex;
 
     > a {
@@ -272,6 +376,22 @@ export default {
         color: white;
       }
     } 
+  }
+}
+
+@media (max-width: 768px) {
+  .input_search {
+    margin: 0;
+    height: 20px;
+  }
+
+  .page_btn {
+    > span {
+      display: block !important;
+    }
+    > ul {
+      display: none !important;
+    }
   }
 }
 </style>

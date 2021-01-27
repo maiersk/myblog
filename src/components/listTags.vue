@@ -1,5 +1,10 @@
 <template>
-  <base-list name="Tags" url="/tags" :selectItems="true">
+  <base-list name="Tags" url="/tags" :options="{
+    selectItems:true,
+    paging: true,
+    pagecount: 4,
+    count: 5,
+  }">
     <template #c_item="d">
       <tag-btn :name="d.item.name" :col="d.item.color"></tag-btn>
     </template>
