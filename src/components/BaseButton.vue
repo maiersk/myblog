@@ -1,23 +1,23 @@
 <template> 
   <input type="button"
+    :ref="`BaseBtnRef_${btnClass}`"
     v-if="type === 'input'"
     class="btn btn-theme"
     :class="btnClass"
     :value="btnValue"
-    @click="operate()"
   />
   <a v-else-if="type === 'a'"
+    :ref="`BaseBtnRef_${btnClass}`"
     class="btn btn-theme"
     :class="btnClass"
-    @click="operate()"
   >
     {{btnValue}}
     <slot name="add_dom"></slot>
   </a>
   <button v-else
+    :ref="`BaseBtnRef_${btnClass}`"
     class="btn btn-theme"
     :class="btnClass"
-    @click="operate()"
   >
     {{btnValue}}
     <slot name="add_dom"></slot>
@@ -32,21 +32,40 @@ export default {
       default: ''
     },
     btnValue: String,
-    btnClass: String,
+    btnClass: {
+      type: String,
+      default() {
+        return `temp_${Math.floor(Math.random() * 50)}`
+      }
+    },
+    display: Boolean,
   },
   data() {
     return {
-      isClick: false
+
+    }
+  },
+  mounted() {
+    const _btnRef = this.$refs?.[`BaseBtnRef_${this.btnClass}`]
+
+    if (this.display) {
+      _btnRef.className += this?.display ? ' none_display' : ''
     }
   },
   methods: {
-    operate: function() {
-      this.isClick = !this.isClick
-      this.$emit('isClick', this.isClick)
-    }
+
   }
 };
 </script>
 
 <style lang="scss" scoped>
+a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.none_display {
+  display: none;
+}
 </style>
