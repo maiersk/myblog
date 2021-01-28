@@ -3,7 +3,7 @@
     <base-button type="input" 
       btnValue="Sign In" 
       btnClass="sign"
-      @isClick="openLogin()"
+      @click="openLogin()"
     >
     </base-button>
   </div>
@@ -11,7 +11,7 @@
     <base-button type="input" 
       btnValue="Sign Out" 
       btnClass="sign"
-      @isClick="signOut()"
+      @click="signOut()"
     >
     </base-button>
   </div>
