@@ -1,10 +1,39 @@
 <template>
-  <base-list name="Blog" url="/posts">
+  <base-list name="Blog" url="/posts" :options="{
+    selectItems: false,
+    row: false,
+    paging: false,
+    pagecount: 4,
+    count: 5,
+  }">
     <template #c_item="d">
-      <div class="container blog_div">
-        <div class="title">{{d.item.title}}</div>
-        <div class="tags">{{d.item.tags}}</div>
-        <div class="content">{{d.item.content}}</div>
+      <div class="container blog_div p-1">
+        <div class="title m-1 flex justify-between align-center">
+          <span>{{d.item.title}}</span>
+
+          <div class="tags m-s1">
+            <ul class="c_ul flex align-center">
+              <li v-for="tag in d.item.tags" :key="tag">
+                {{tag}}
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="content m-s1">
+          <p>
+            {{d.item.content}}
+          </p>
+        </div>
+        <div class="operator flex justify-between align-center">
+          <div class="comments">
+            <span>comments</span>
+          </div>
+          <div class="time">
+            <span>
+              {{time(d.item.createdAt)}}
+            </span>
+          </div>
+        </div>
       </div>
     </template>
 
@@ -76,7 +105,8 @@ export default {
   provide() {
     return {
       model: computed({
-        set: (val) => {this.model = val.length !== 0 ? val : {
+        set: (val) => {
+          this.model = Object.keys(val).length !== 0 ? val : {
           id: null, title: null, tags: [], content: null
         }},
         get: () => {return this.model}
@@ -98,11 +128,36 @@ export default {
     }
   },
   methods: {
-    
+    time(str_time) {
+      const date = new Date(str_time)
+      let arr = []
+      arr.push(date.getFullYear())
+      arr.push(date.getMonth() + 1)
+      arr.push(date.getDate())
+
+      return arr.join('/') + ` ${date.getHours()}:${date.getMinutes()}` 
+    }
   },
 }
 </script>
 
 <style lang="scss" scoped>
+.blog_div {
+  background-color: #282828;
+  border-bottom: 1px solid #303030;
 
+  .title {
+
+    > span {
+      font-size: 24px;
+    } 
+
+    .tags {
+
+    }
+  }
+  .content {
+
+  }
+}
 </style>

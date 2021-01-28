@@ -26,7 +26,7 @@
       </slot>
     </div>
     <slot name="List" :list="list.data">
-      <ul class="ul_list c_ul flex flex-warp">
+      <ul class="ul_list c_ul flex" :class="options.row ? 'flex-row' : 'flex-column'">
         <span class="m-1 block-center" v-if="!list.data?.length">no item</span>
         <li v-for="item in list.data" :key="item.id">
           <input type="checkbox" :id="`${name}_select_${item.id}`"
@@ -63,7 +63,7 @@
       </ul>
       <span>page: {{page + 1}}</span>
       <base-btn class="next_btn" btnValue="Next"
-        :disabled="page === list.total_pages ? true : false"
+        :disabled="page + 1 === list.total_pages ? true : false"
         @click.prevent="nextPage()"
       ></base-btn>
     </div>
@@ -132,6 +132,7 @@ export default {
           paging: false,
           pagecount: 5,
           count: 10,
+          row: false,
         }
       }
     },
@@ -185,7 +186,7 @@ export default {
     initPage() {
       if (this.pagelist.length) this.pagelist = []
       if (!this.list.total_pages) return
-      let arr = new Array(this.list.total_pages + 1)
+      let arr = new Array(this.list.total_pages)
         .fill().map((_, i) => {return i+1})
 
       arr.some(() => {
@@ -228,6 +229,9 @@ export default {
       }).then((res) => {
         this.list = res
         this.initPage()
+        if (!res.data.length) {
+          this.prevPage()
+        }
       }).catch((err) => {
         this.$root.openNotifi(false, err.message)
       })
@@ -247,8 +251,8 @@ export default {
         method: 'post',
         url: this.url,
         data: this.model.value,
-      }).then(({ data }) => {
-        this.list.data.push(data)
+      }).then(() => {
+        this.getAll()
         this.cleanModel()
         this.$root.openNotifi(true, 'create success')
       }).catch((err) => {
@@ -280,7 +284,7 @@ export default {
           method: 'delete',
           url: `${this.url}/${id}`,
         }).then(() => {
-          this.list.data = this.list.data.filter((item) => { return item.id !== id })
+          this.getAll()
           this.cleanModel()
           this.$root.openNotifi(true, 'delete success')
         }).catch((err) => {
@@ -310,6 +314,7 @@ export default {
         display: none;
       }
       > label {
+        width: 100%;
         display: block;
       }
   
