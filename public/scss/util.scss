@@ -1,8 +1,17 @@
 .flex {
   display: flex !important;
 }
+.flex-column {
+  flex-direction: column !important;
+}
+.flex-row {
+  flex-direction: row !important;
+}
 .flex-warp {
   flex-wrap: wrap !important;
+}
+.justify-between {
+  justify-content: space-between !important;
 }
 .justify-center {
   justify-content: center !important;
@@ -27,6 +36,12 @@
   height: 100vh !important;
 }
 
+.m-0 {
+  margin: 0 !important;
+}
+.m-s1 {
+  margin: 0.25rem !important;
+}
 .m-1 {
   margin: 0.5rem !important;
 }
@@ -38,6 +53,31 @@
 }
 .m-4 {
   margin: 2rem !important;
+}
+.m-5 {
+  margin: 2.5rem !important;
+}
+
+.p-0 {
+  padding: 0 !important;
+}
+.p-s1 {
+  padding: 0.25rem !important;
+}
+.p-1 {
+  padding: 0.5rem !important;
+}
+.p-2 {
+  padding: 1rem !important;
+}
+.p-3 {
+  padding: 1.5rem !important;
+}
+.p-4 {
+  padding: 2rem !important;
+}
+.p-5 {
+  padding: 2.5rem !important;
 }
 
 .container {
