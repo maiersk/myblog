@@ -1,6 +1,7 @@
 <template>
   <base-list name="Tags" url="/tags" :options="{
     selectItems:true,
+    row: true,
     paging: true,
     pagecount: 4,
     count: 5,
@@ -64,7 +65,8 @@ export default {
   provide() {
     return {
       model: computed({
-        set: (val) => {this.model = val.length !== 0 ? val : {
+        set: (val) => {
+          this.model = Object.keys(val).length !== 0 ? val : {
           id: null, name: null, color: "#000000"
         }},
         get: () => {return this.model}
