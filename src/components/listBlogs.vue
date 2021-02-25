@@ -14,7 +14,7 @@
           <div class="tags m-s1">
             <ul class="c_ul flex align-center">
               <li v-for="tag in d.item.tags" :key="tag">
-                {{tag}}
+                <tag-btn :name="tag.name" :col="tag.color"></tag-btn>
               </li>
             </ul>
           </div>
@@ -86,13 +86,15 @@
 
 <script>
 import listTags from './listTags'
+import tagBtn from './Buttons/tagBtn'
 import BaseList from './BaseList'
 import { computed } from 'vue'
 
 export default {
   components: {
     listTags,
-    BaseList
+    BaseList,
+    tagBtn
   },
   props: {
     posts: {
@@ -135,7 +137,7 @@ export default {
       arr.push(date.getMonth() + 1)
       arr.push(date.getDate())
 
-      return arr.join('/') + ` ${date.getHours()}:${date.getMinutes()}` 
+      return arr.join('/')
     }
   },
 }
