@@ -233,7 +233,7 @@ export default {
           this.prevPage()
         }
       }).catch((err) => {
-        this.$root.openNotifi(false, err.message)
+        this.$root.openNotifi(false, err)
       })
     },
     select(id) {
@@ -243,7 +243,7 @@ export default {
       }).then(({ data }) => {
         this.model.value = data
       }).catch((err) => {
-        this.$root.openNotifi(false, err.message)
+        this.$root.openNotifi(false, err)
       })
     },
     add() {
@@ -256,7 +256,7 @@ export default {
         this.cleanModel()
         this.$root.openNotifi(true, 'create success')
       }).catch((err) => {
-        this.$root.openNotifi(false, err.message)
+        this.$root.openNotifi(false, err)
       })
     },
     edit() {
@@ -272,7 +272,7 @@ export default {
           this.cleanModel()
           this.$root.openNotifi(true, 'edit success')
         }).catch((err) => {
-          this.$root.openNotifi(false, err.message)
+          this.$root.openNotifi(false, err)
         })
       }
     },
@@ -288,7 +288,7 @@ export default {
           this.cleanModel()
           this.$root.openNotifi(true, 'delete success')
         }).catch((err) => {
-          this.$root.openNotifi(false, err.message)
+          this.$root.openNotifi(false, err)
         })
       }
     }
