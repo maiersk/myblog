@@ -108,9 +108,19 @@ export default {
     return {
       model: computed({
         set: (val) => {
-          this.model = Object.keys(val).length !== 0 ? val : {
-          id: null, title: null, tags: [], content: null
-        }},
+          // 避免edit model时清理了之前选中的tags
+          let _tags = this.model.tags
+          // select modal在select tag时，把已有选有的tag显示在列表
+          if (val.tags?.length ?? false) {
+            _tags = val.tags.map((v) => {return v.id})
+          }
+
+          this.model = Object.keys(val).length !== 0 ? {
+            ...val, tags: _tags
+          } : {
+            id: null, title: null, tags: [], content: null
+          }
+        },
         get: () => {return this.model}
       }),
       selectModels: computed({
