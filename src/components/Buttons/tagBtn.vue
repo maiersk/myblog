@@ -3,7 +3,10 @@
     <base-button type="a"
       btnClass="tag_btn"
       btnValue=""
-      :style="`background-color: ${col}`"
+      :style="`
+        border: 1px solid ${col};
+        background-color: ${col+'38'};
+      `"
     >
       <template #add_dom>
         <span>{{name}}</span>
@@ -39,8 +42,14 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
+    height: 20px;
+    width: auto;
+    max-width: 100px;
 
     span {
+      margin-left: 8px;
+      margin-right: 8px;
+      font-size: 12px;
       mix-blend-mode: difference;
     }
   }
