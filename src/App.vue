@@ -38,11 +38,13 @@ import panelPresonal from "./components/panelPresonal";
 import panelAcIcon from "./components/panelAccountIcon";
 import panelSignBtns from './components/panelSignBtns';
 import useNotification from './utilities/mixins/useNotification';
+import utils from './utilities/mixins/utils';
 
 export default {
   name: "App",
   mixins: [
     useNotification,
+    utils
   ],
   components: {
     navBarBtn,
@@ -65,7 +67,12 @@ export default {
     };
   },
   beforeMount() {
-    this.links = this.$router.getRoutes();
+    // 获取routers并赋值给新数组
+    const _links = this.$router.getRoutes().splice(0);
+    // 过滤route中mate想要显示的item
+    this.links = _links.filter((item) => {
+      return !item.meta?.notshow
+    })
   },
 };
 </script>
