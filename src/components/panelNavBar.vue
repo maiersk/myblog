@@ -3,7 +3,7 @@
     <div class="navbar" :class="state.bar_open ? 'nav_open' : ''">
       <ul class="c_ul">
         <li v-for="link in navlinks" :key="link" @click="closeBar()">
-          <router-link :to="link.path">
+          <router-link class="c_a" :to="link.path">
             <faIcon class="faicon" :icon="link.meta.icon" />
             <span>{{link.meta.title}}</span>
           </router-link>
@@ -88,8 +88,6 @@ export default {
           a { color: white; }
         }
         a {
-          color: $navbar_bg_color;
-          text-decoration: none;
           font-weight: bold;
           width: 100%;
           display: flex;

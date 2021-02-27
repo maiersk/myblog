@@ -10,21 +10,24 @@
       <div class="container blog_div p-2">
         <div class="top">
           <div class="title_item">
-            <span class="title">
+            <router-link class="c_a title" 
+              :to="{path: '/blog', query: {id: d.item.id}}"
+            >
               {{d.item.title}}
-            </span>
+            </router-link>
             <span class="time">
-              {{time(d.item.createdAt)}}
+              {{$root.format_time(d.item.createdAt, "YYYY-MM-dd")}}
             </span>
           </div>
         </div>
-        <div class="content">
-          <p>
-            {{d.item.content}}
-          </p>
-        </div>
+        <router-link class="c_a" 
+          :to="{path: '/blog', query: {id: d.item.id}}"
+        >
+          <div class="content" v-html="$root.markedContent(d.item.content)">
+          </div>
+        </router-link>
         <div class="other_item flex align-center">
-          <div class="comments flex align-center border">
+          <div class="comments flex align-center">
             <faIcon :icon="['fas', 'comments']"></faIcon>
             <span class="m-1">{{d.item.comments?.length ?? 0}}</span>
           </div>
@@ -148,18 +151,7 @@ export default {
         content: null,
       }
     }
-  },
-  methods: {
-    time(str_time) {
-      const date = new Date(str_time)
-      let arr = []
-      arr.push(date.getFullYear())
-      arr.push(date.getMonth() + 1)
-      arr.push(date.getDate())
-
-      return arr.join('/')
-    }
-  },
+  }
 }
 </script>
 
@@ -168,6 +160,7 @@ export default {
   background-color: #282828;
   border-bottom: 1px solid #303030;
   transition: all 0.5s ease;
+  margin-bottom: 1.5rem;
 
   .top {
     display: table;
@@ -181,6 +174,9 @@ export default {
         font-weight: 600;
         font-size: 1.4rem;
         cursor: pointer;
+      }
+      .title:hover {
+        color: rgb(255, 178, 69);
       }
       .time {
         font-size: .5em;
@@ -207,10 +203,23 @@ export default {
     max-height: 260px;
     margin: 1rem 0;
     padding: 0.5rem;
+    overflow: hidden;
+    color: white;
   }
 
   .other_item {
     height: 20px;
+
+    .comments {
+      margin-right: 0.5rem;
+    }
+    .viewcount {
+      @extend .comments;
+    }
+
+    .tags {
+      margin: 0 1rem;
+    }
   }
 }
 .blog_div:hover {   
