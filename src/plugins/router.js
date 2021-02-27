@@ -12,7 +12,7 @@ const routes = [
   },
   {
     path: '/blog', component: blog, meta: {
-      title: "Blog", icon: ["fa", "blog"]
+      notshow: true, title: "Blog", icon: ["fa", "blog"]
     }
   },
   {

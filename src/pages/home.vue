@@ -4,8 +4,7 @@
       <h1>Home</h1>
     </template>
     <template #body>
-      <input type="button" value="add" @click="add" />
-      {{state.count}}
+      <list-blogs />
     </template>
   </page-theme>
 </template>
@@ -13,10 +12,12 @@
 <script>
 import { useStore } from "vuex";
 import pageTheme from "../components/pageTheme";
+import listBlogs from "../components/listBlogs";
 
 export default {
   components: {
     pageTheme,
+    listBlogs,
   },
   setup() {
     const sotre = useStore();
