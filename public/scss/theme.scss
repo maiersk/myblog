@@ -40,6 +40,14 @@ body { background-color: $main_bg_color;}
   color: $c_main;
 }
 
+.c_div {
+  background-color: #282828;
+  box-shadow: 0 1px 3px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.12);
+  border: 1px solid #303030;
+  border-radius: 2px;
+  padding: 0.5rem;
+}
+
 // button theme
 .btn-theme {
   background-color: black;
