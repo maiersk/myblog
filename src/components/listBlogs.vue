@@ -9,7 +9,7 @@
     <template #c_item="d">
       <div class="container blog_div p-2">
         <div class="top">
-          <div class="title_item">
+          <div class="title_item flex align-center">
             <router-link class="c_a title" 
               :to="{path: '/blog', query: {id: d.item.id}}"
             >

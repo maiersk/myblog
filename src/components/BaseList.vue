@@ -26,7 +26,7 @@
       </slot>
     </div>
     <slot name="List" :list="list.data">
-      <ul class="ul_list c_ul flex" :class="options.row ? 'flex-row' : 'flex-column'">
+      <ul class="ul_list c_ul" :class="options.row ? 'flex-row' : 'flex-column'">
         <span class="m-1 block-center" v-if="!list.data?.length">no item</span>
         <li v-for="item in list.data" :key="item.id">
           <input type="checkbox" :id="`${name}_select_${item.id}`"
