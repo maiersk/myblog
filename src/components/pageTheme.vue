@@ -1,10 +1,12 @@
 <template>
   <div class="page-theme">
-    <div class="container title_div">
-      <div class="path">
-        <faIcon class="faicon" :icon="icon"></faIcon>
-      </div> 
-      <slot name="title">Page Title</slot>
+    <div class="container title_div c_div">
+      <slot name="c_title">
+        <div class="path">
+          <faIcon class="faicon" :icon="icon"></faIcon>
+        </div>
+        <slot name="title">Page Title</slot>  
+      </slot>
     </div>
     <main class="container">
       <slot name="body">Page Body</slot>
@@ -36,13 +38,8 @@ export default {
     flex-grow: 1; //使用剩余高度
 
     .title_div {
-      background-color: #282828;
-      border: 1px solid #303030;
-      display: flex;  
+      display: flex;
       align-items: center;
-      box-shadow: 0 1px 3px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.12);
-      border-radius: 2px;
-      padding: 0.5rem;
     }
     
     .path {
