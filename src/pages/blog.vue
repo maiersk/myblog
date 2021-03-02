@@ -16,7 +16,7 @@
             <faIcon :icon="['fas', 'tags']"></faIcon>
             <ul class="c_ul m-1 flex">
               <li v-for="tag in post.tags" :key="tag">
-                <tag-btn :name="tag.name" :col="tag.color"></tag-btn>
+                <tag-model :name="tag.name" :col="tag.color"></tag-model>
               </li>
             </ul>
           </div>
@@ -34,16 +34,17 @@
     </template>
     <template #body>
       <div class="content" v-html="$root.markedContent(post.content)"></div>
+
       <div class="discuss">
         <div class="discuss_header">
           <span>{{post.comments.length}}</span>条评论
           <div class="c-divider c-divider-horizontal"></div>
         </div>
         <div class="send_comment">
-
+          <comment-model></comment-model>
         </div>
         <div class="comments">
-          <div class="comment-inner"></div>
+          <list-comments></list-comments>
         </div>
       </div>
     </template>
@@ -53,17 +54,22 @@
 <script>
 import pageTheme from "../components/pageTheme";
 import { axiosReq } from "../plugins/axios";
-import tagBtn from "../components/Buttons/tagBtn";
+import tagModel from "../components/Buttons/tagModel";
+import listComments from "../components/listComments";
+import commentModel from "../components/commentModel";
 
 export default {
   components: {
     pageTheme,
-    tagBtn
+    tagModel,
+    listComments,
+    commentModel
   },
   data() {
     return {
       post: {},
-      icon: this.$router.currentRoute.value.meta.icon
+      icon: this.$router.currentRoute.value.meta.icon,
+      state: this.$store.state
     }
   },
   beforeCreate() {
@@ -97,6 +103,21 @@ export default {
   }
 
   .content {
-    margin: 0 10px;
+    margin: 1rem 10px;
+  }
+
+  .discuss {
+    box-sizing: border-box;
+
+    > .discuss_header {
+      > span {
+        color: #d78520;
+        padding: 0 8px;
+      }
+    }
+
+    > .send_comment {
+
+    }
   }
 </style>

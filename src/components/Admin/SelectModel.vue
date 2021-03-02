@@ -1,0 +1,57 @@
+<template>
+  <input type="checkbox" :id="`${name}_select_${item.id}`"
+    :ref="`${name}_selectRef_${item.id}`"
+    @change="select_item(item.id)"
+    :checked="selectModels.value.includes(item.id)"
+  >
+  <label :for="options.selectItems ? `${name}_select_${item.id}` : ''">
+    <slot name="select_dom">
+      item
+    </slot>
+  </label>
+</template>
+
+<script>
+export default {
+  inject: ['selectModels'],
+  props: {
+    name: {
+      type: String,
+      default: ''
+    },
+    item: {
+      type: Object,
+      default() {
+        return {}
+      }
+    }
+  },
+  data() {
+    return {
+
+    }
+  },
+  beforeUnmount() {
+    // 清理选中的models
+    if (this.selectModels?.value?.length ?? false) {
+      this.selectModels.value.length = 0
+    }
+  },
+  methods: {
+    select_item(id) {
+      const _selectRef = this.$refs[`${this.name}_selectRef_${id}`]
+      const _selModels = this.selectModels
+
+      if (_selectRef.checked && !_selModels.value.includes(id)) {
+        _selModels.value.push(id)
+      } else {
+        _selModels.value.splice(_selModels.value.indexOf(id), 1)
+      }
+    },
+  }
+}
+</script>
+
+<style scoped>
+
+</style>
