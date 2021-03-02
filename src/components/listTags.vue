@@ -1,13 +1,13 @@
 <template>
   <base-list name="Tags" url="/tags" :options="{
-    selectItems:true,
+    selectItems: true,
     row: true,
     paging: true,
     pagecount: 4,
     count: 5,
   }">
     <template #c_item="d">
-      <tag-btn :name="d.item.name" :col="d.item.color"></tag-btn>
+      <tag-model :name="d.item.name" :col="d.item.color"></tag-model>
     </template>
 
     <template v-slot:createModel>
@@ -45,13 +45,13 @@
 </template>
 
 <script>
-import tagBtn from './Buttons/tagBtn'
+import tagModel from './Buttons/tagModel'
 import BaseList from './BaseList'
 import { computed } from 'vue'
 
 export default {
   components: {
-    tagBtn,
+    tagModel,
     BaseList
   },
   props: {

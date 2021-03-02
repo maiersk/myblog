@@ -42,7 +42,7 @@
             <faIcon :icon="['fas', 'tags']"></faIcon>
             <ul class="c_ul m-1 flex">
               <li v-for="tag in d.item.tags" :key="tag">
-                <tag-btn :name="tag.name" :col="tag.color"></tag-btn>
+                <tag-model :name="tag.name" :col="tag.color"></tag-model>
               </li>
             </ul>
           </div>
@@ -99,7 +99,7 @@
 
 <script>
 import listTags from './listTags'
-import tagBtn from './Buttons/tagBtn'
+import tagModel from './Buttons/tagModel'
 import BaseList from './BaseList'
 import { computed } from 'vue'
 
@@ -107,7 +107,7 @@ export default {
   components: {
     listTags,
     BaseList,
-    tagBtn
+    tagModel
   },
   props: {
     posts: {
