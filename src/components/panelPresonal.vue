@@ -1,15 +1,27 @@
 <template>
   <div class="presonal"
-    :class="!option.vertical ? 'no_vertical' : ''" 
+    :class="`
+      ${!(options?.vertical ?? false) ? 'no_vertical' : ''}
+      ${(options?.l_h ?? false) ? 'l_h' : ''}
+      ${(options?.r_h ?? false) ? 'r_h' : ''}
+    `"
   >
-    <img id="avatar"
-      :src="avatar ? avatar : require('@/assets/avatar.jpg')"
-      :width="option.avatarSize[0]" 
-      :height="option.avatarSize[1]" 
+    <img id="avatar" v-if="options?.avatar ?? false"
+      :src="options?.avatar ?? ''"
+      :width="options?.avatarSize?.[0] ?? 64" 
+      :height="options?.avatarSize?.[1] ?? 64" 
     />
-    <router-link :to="routerLink" id="name">
-      <span>{{name}}</span>
-    </router-link>
+    <span class="nameAvatar" v-else-if="(options?.nameAvatar ?? false) && options.name">
+      <span class="nameAvatar-string" :style="`transform: scale(1.5) translateX(-50%);`">{{options.name.substring(0,1)}}</span>
+    </span>
+    <faIcon id="avatar" v-else
+      :icon="['fab', 'github']"
+      size="2x"
+    ></faIcon>
+
+    <span id="name" v-if="options?.nameShow ?? true"
+      :style="`color: ${options?.color ?? 'black'}`"
+    >{{options?.name ?? 'Guest'}}</span>
   </div>
 </template>
 
@@ -17,24 +29,17 @@
 
 export default {
   props: {
-    name: {
-      type: String,
-      default: 'Maiersk'
-    },
-    routerLink: {
-      type: String,
-      default: '/about'
-    },
-    avatar: {
-      type: String,
-      default: ''
-    },
-    option: {
+    options: {
       type: Object,
       default() {
         return {
+          name: '',
+          avatar: '',
           avatarSize: [64, 64],
           vertical: true,
+          color: '',
+          nameAvatar: '',
+          nameShow: null,
         }
       }
     }
@@ -57,6 +62,38 @@ export default {
       border-radius: 30px;
       box-shadow: 0 0 10px 2px #303030;
     }
+    .nameAvatar {
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      color: rgba(0,0,0,.65);
+      font-size: 14px;
+      font-variant: tabular-nums;
+      line-height: 1.5;
+      list-style: none;
+      -webkit-font-feature-settings: "tnum";
+      font-feature-settings: "tnum","tnum";
+      position: relative;
+      display: inline-block;
+      overflow: hidden;
+      color: #fff;
+      white-space: nowrap;
+      text-align: center;
+      vertical-align: middle;
+      background: #ccc;
+      width: 32px;
+      height: 32px;
+      line-height: 32px;
+      border-radius: 50%;
+    }
+    .nameAvatar-string {
+      position: absolute;
+      left: 50%;
+      -webkit-transform-origin: 0 center;
+      -ms-transform-origin: 0 center;
+      transform-origin: 0 center;
+    }
     #name {
       margin-top: 1rem;
       color: black;
@@ -68,13 +105,18 @@ export default {
     }
   }
 
+  .l_h {
+    flex-flow: row !important;
+  }
+  .r_h {
+    flex-flow: row-reverse !important;
+  }
   .no_vertical {
     margin-top: 0;
-    flex-flow: row-reverse !important;
 
     #name {
       margin-top: 0;
-      margin-right: 1rem;
+      margin: 0 1rem;
     }
   }
 

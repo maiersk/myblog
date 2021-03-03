@@ -16,7 +16,7 @@
               {{d.item.title}}
             </router-link>
             <span class="time">
-              {{$root.format_time(d.item.createdAt, "YYYY-MM-dd")}}
+              {{$root.format_time(d.item.createdAt, "YYYY-mm-dd")}}
             </span>
           </div>
         </div>

@@ -24,7 +24,7 @@
         <li v-for="item in list.data" :key="item.id">
 
           <!-- 选中项目 -->
-          <select-model :name="name" :item="item">
+          <select-model :name="name" :item="item" :options="options">
             <template #select_dom>
               <slot name="c_item" :item="item">
                 {{item.name}}
@@ -98,7 +98,6 @@ export default {
     }
   },
   created() {
-    console.log(this)
     this.getAll()
   },
   methods: {
@@ -195,19 +194,6 @@ export default {
       display: flex;
       align-items: center;
       margin: 0.25rem;
-
-      > input {
-        display: none;
-      }
-      > label {
-        width: 100%;
-        display: block;
-      }
-  
-      > input:checked + label {
-        border-radius: 4px;
-        background-color: #ffffff;
-      }
     }
   }
 }

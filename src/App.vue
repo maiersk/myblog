@@ -3,18 +3,25 @@
     <header>
       <panel-presonal 
         v-if="state.isLogged"
-        :name="state.user.name"
-        :avatar="state.user.avatar"
-        :option="{
-          avatarSize:[32,32],
-          vertical:false,
+        :options="{
+          name: state.user.name,
+          avatar: state.user.avatar,
+          avatarSize: [32,32],
+          vertical: false,
+          r_h: true
         }"
       />
       <panel-sign-btns />
     </header>
     <aside>
       <nav-bar-btn />
-      <panel-presonal />
+      <panel-presonal
+        :options="{
+          name: 'Maiserk',
+          avatar: require('@/assets/avatar.jpg'),
+          vertical: true
+        }"
+      />
     </aside>
     <panel-nav-bar :navlinks="links" />
 

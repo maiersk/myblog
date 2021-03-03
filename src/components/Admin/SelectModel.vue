@@ -24,6 +24,12 @@ export default {
       default() {
         return {}
       }
+    },
+    options: {
+      type: Object,
+      default() {
+        return {}
+      }
     }
   },
   data() {
@@ -53,5 +59,16 @@ export default {
 </script>
 
 <style scoped>
+  input {
+    display: none;
+  }
+  label {
+    width: 100%;
+    display: block;
+  }
 
+  input:checked + label {
+    border-radius: 4px;
+    background-color: #ffffff;
+  }
 </style>

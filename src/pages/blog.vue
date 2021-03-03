@@ -8,7 +8,7 @@
           <div class="time">
             <faIcon class="faicon" :icon="icon"></faIcon>
             <span>
-              Posted on {{$root.format_time(post.createdAt, "YYYY-MM-dd")}}
+              Posted on {{$root.format_time(post.createdAt, "YYYY-mm-dd")}}
             </span>
           </div>
           <span>|</span>
