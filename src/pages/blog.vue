@@ -41,7 +41,7 @@
           <div class="c-divider c-divider-horizontal"></div>
         </div>
         <div class="send_comment">
-          <comment-model></comment-model>
+          <comment-model :send_mode="true"></comment-model>
         </div>
         <div class="comments">
           <list-comments></list-comments>
@@ -107,6 +107,7 @@ export default {
   }
 
   .discuss {
+    position: relative;
     box-sizing: border-box;
 
     > .discuss_header {

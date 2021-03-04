@@ -1,11 +1,12 @@
 <template>
-  <base-list name="Blog" url="/posts" :options="{
+  <listBaseCRUD name="Blog" url="/posts" :options="{
     selectItems: false,
     row: false,
     paging: false,
     pagecount: 4,
     count: 5,
   }">
+  
     <template #c_item="d">
       <div class="container blog_div p-2">
         <div class="top">
@@ -50,7 +51,7 @@
       </div>
     </template>
 
-    <template v-slot:createModel>
+    <template v-slot:create>
       <div class="form-group">
         <label>Post Title:</label>
         <input type="text" class="input_text" 
@@ -70,7 +71,7 @@
         ></textarea>
       </div>
     </template>
-    <template v-slot:editModel>
+    <template v-slot:edit>
       <div class="form-group">
         <label>Post Title:</label>
         <input type="text" class="input_text" 
@@ -90,23 +91,25 @@
         ></textarea>
       </div>
     </template>
-    <template v-slot:deleteModel>
+    <template v-slot:delete>
       <div></div>
     </template>
 
-  </base-list>
+  </listBaseCRUD>
 </template>
 
 <script>
 import listTags from './listTags'
 import tagModel from './Buttons/tagModel'
-import BaseList from './BaseList'
+// import BaseList from './BaseList'
+import listBaseCRUD from './Admin/listBaseCRUD'
 import { computed } from 'vue'
 
 export default {
   components: {
     listTags,
-    BaseList,
+    // BaseList,
+    listBaseCRUD,
     tagModel
   },
   props: {
