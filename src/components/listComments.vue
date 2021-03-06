@@ -1,5 +1,5 @@
 <template>
-  <listBaseCRUD name="Comment" url="/comments" :options="{
+  <modalCRUD name="Comment" url="/comments" :options="{
     selectItems: false,
     row: false,
     paging: false,
@@ -10,7 +10,7 @@
       <comment-model :model="d.item"></comment-model>
     </template>
 
-    <template v-slot:create>
+    <template v-slot:createModel>
       <div class="form-group">
         <label>Comment content:</label>
         <textarea class="textarea_c" 
@@ -18,7 +18,7 @@
         ></textarea>
       </div>
     </template>
-    <template v-slot:edit>
+    <template v-slot:editModel>
       <div class="form-group">
         <label>Comment content:</label>
         <textarea class="textarea_c" 
@@ -26,22 +26,22 @@
         ></textarea>
       </div>
     </template>
-    <template v-slot:delete>
+    <template v-slot:deleteModel>
       <div></div>
     </template>
-  </listBaseCRUD>
+  </modalCRUD>
 </template>
 
 <script>
 import { computed } from "vue";
-import listBaseCRUD from "./Admin/listBaseCRUD";
+import modalCRUD from "./Admin/CURD/ModalCRUD";
 import commentModel from "./commentModel";
 // import BaseList from "./BaseList";
 
 export default {
   components: {
     // BaseList,
-    listBaseCRUD,
+    modalCRUD,
     commentModel,
   },
   props: {

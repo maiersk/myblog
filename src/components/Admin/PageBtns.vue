@@ -1,12 +1,12 @@
 <template>
   <div class="page_btn flex justify-center align-center" 
-    v-if="options.paging && list.data?.length"
+    v-if="options.paging && options.list.data?.length"
   >
     <base-btn class="prev_btn" btnValue="Prev"
       :disabled="page === 0 ? true : false"
       @click.prevent="prevPage()"
     ></base-btn>
-    <ul class="c_ul flex" v-if="list?.total_pages ?? false">
+    <ul class="c_ul flex" v-if="options.list?.total_pages ?? false">
       <li v-for="i in pagelist[pagelistidx]" :key="i">
         <base-btn
           btnClass="p_btn" :btnValue="''+i"
@@ -18,7 +18,7 @@
     </ul>
     <span>page: {{page + 1}}</span>
     <base-btn class="next_btn" btnValue="Next"
-      :disabled="page + 1 === list.total_pages ? true : false"
+      :disabled="page + 1 === options.list.total_pages ? true : false"
       @click.prevent="nextPage()"
     ></base-btn>
   </div>
@@ -60,7 +60,7 @@ export default {
       this.$emit('getAll')
     },
     nextPage() {
-      if (this.page >= this.list.total_pages) return
+      if (this.page >= this.options.list?.total_pages ?? false) return
       if ((this.page + 1) % this.options.pagecount === 0) {
         this.pagelistidx += 1
       }
@@ -69,8 +69,8 @@ export default {
     },
     initPage() {
       if (this.pagelist.length) this.pagelist = []
-      if (!this.list.total_pages) return
-      let arr = new Array(this.list.total_pages)
+      if (!this.options.list?.total_pages ?? false) return
+      let arr = new Array(this.options.list.total_pages)
         .fill().map((_, i) => {return i+1})
 
       arr.some(() => {

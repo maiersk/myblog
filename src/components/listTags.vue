@@ -1,5 +1,5 @@
 <template>
-  <base-list name="Tags" url="/tags" :options="{
+  <modalCRUD name="Tags" url="/tags" :options="{
     selectItems: true,
     row: true,
     paging: true,
@@ -41,18 +41,18 @@
     <template v-slot:deleteModel>
       <div></div>
     </template>
-  </base-list>
+  </modalCRUD>
 </template>
 
 <script>
 import tagModel from './Buttons/tagModel'
-import BaseList from './BaseList'
+import modalCRUD from './Admin/CURD/ModalCRUD'
 import { computed } from 'vue'
 
 export default {
   components: {
     tagModel,
-    BaseList
+    modalCRUD
   },
   props: {
     tags: {

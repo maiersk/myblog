@@ -1,5 +1,5 @@
 <template>
-  <listBaseCRUD name="Blog" url="/posts" :options="{
+  <modalCRUD name="Blog" url="/posts" :options="{
     selectItems: false,
     row: false,
     paging: false,
@@ -51,7 +51,7 @@
       </div>
     </template>
 
-    <template v-slot:create>
+    <template v-slot:createModel>
       <div class="form-group">
         <label>Post Title:</label>
         <input type="text" class="input_text" 
@@ -71,7 +71,7 @@
         ></textarea>
       </div>
     </template>
-    <template v-slot:edit>
+    <template v-slot:editModel>
       <div class="form-group">
         <label>Post Title:</label>
         <input type="text" class="input_text" 
@@ -91,25 +91,25 @@
         ></textarea>
       </div>
     </template>
-    <template v-slot:delete>
+    <template v-slot:deleteModel>
       <div></div>
     </template>
 
-  </listBaseCRUD>
+  </modalCRUD>
 </template>
 
 <script>
 import listTags from './listTags'
 import tagModel from './Buttons/tagModel'
 // import BaseList from './BaseList'
-import listBaseCRUD from './Admin/listBaseCRUD'
+import modalCRUD from './Admin/CURD/ModalCRUD'
 import { computed } from 'vue'
 
 export default {
   components: {
     listTags,
     // BaseList,
-    listBaseCRUD,
+    modalCRUD,
     tagModel
   },
   props: {
