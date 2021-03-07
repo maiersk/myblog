@@ -62,7 +62,7 @@
         <li v-for="item in list.data" :key="item.id">
 
           <!-- 选中项目 -->
-          <select-model :name="name" :item="item" :options="options">
+          <select-model :name="name" :item="item" :selectItems="options.selectItems">
             <template #select_dom>
               <slot name="c_item" :item="item">
                 {{item.name}}
@@ -74,7 +74,12 @@
     </slot>
 
     <!-- 列表分页 -->
-    <page-btns :options="{ ...options, list}"></page-btns>
+    <page-btns
+      :ref="pageBtnsRef"
+      :paging="options.paging"
+      :pagecount="options.pagecount"
+      @getAll="getAll()"
+    ></page-btns>
   </div>
 </template>
 
@@ -85,7 +90,6 @@ import editModel from '../../Modals/editModel'
 import delModel from '../../Modals/delModel'
 import listBaseCRUD from '../listBaseCRUD'
 import selectModel from "../SelectModel";
-import pageBtns from "../PageBtns";
 
 export default {
   components: {
@@ -93,9 +97,10 @@ export default {
     editModel,
     delModel,
     selectModel,
-    pageBtns,
   },
-  extends: listBaseCRUD,
+  mixins: [
+    listBaseCRUD
+  ],
   inject: ['model'],
   props: {
     name: {
@@ -116,6 +121,9 @@ export default {
     return {
       select_modal: '',
     }
+  },
+  created() {
+    this.pageBtnsRef = `${this.name}_page_btns`
   },
   methods: {
     openModal(name) {

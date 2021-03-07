@@ -1,8 +1,8 @@
 <script>
 import { computed } from "vue";
 import { axiosReq } from "../../plugins/axios";
-import selectModel from "./SelectModel";
 import pageBtns from "./PageBtns";
+
 /**
  * 基础模型CRUD组件
  * inject: model
@@ -10,10 +10,9 @@ import pageBtns from "./PageBtns";
  */
 
 export default {
-  mixins: [
-    selectModel,
-    pageBtns,
-  ],
+  components: {
+    pageBtns
+  },
   props: {
     name: {
       type: String,
@@ -36,15 +35,17 @@ export default {
       }
     },
   },
-  inject: [],
   provide() {
     return {
-      list: computed(() => {return this.list.data}),
+      list: computed(() => {return this.list}),
+      page: computed(() => {return this.page}),
     }
   },
   data() {
     return {
       list: {},
+      page: 0,
+      pageBtnsRef: ''
     }
   },
   created() {
@@ -63,9 +64,9 @@ export default {
         url,
       }).then((res) => {
         this.list = res
-        this.initPage()
+        this.$refs[this.pageBtnsRef].initPage()
         if (!res.data.length) {
-          this.prevPage()
+          this.$refs[this.pageBtnsRef].prevPage()
         }
       }).catch((err) => {
         this.$root.openNotifi(false, err)

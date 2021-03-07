@@ -1,12 +1,13 @@
 <template>
+  {{pagelist}}
   <div class="page_btn flex justify-center align-center" 
-    v-if="options.paging && options.list.data?.length"
+    v-if="paging && list.value?.data?.length"
   >
     <base-btn class="prev_btn" btnValue="Prev"
       :disabled="page === 0 ? true : false"
       @click.prevent="prevPage()"
     ></base-btn>
-    <ul class="c_ul flex" v-if="options.list?.total_pages ?? false">
+    <ul class="c_ul flex" v-if="list.value?.total_pages ?? false">
       <li v-for="i in pagelist[pagelistidx]" :key="i">
         <base-btn
           btnClass="p_btn" :btnValue="''+i"
@@ -18,7 +19,7 @@
     </ul>
     <span>page: {{page + 1}}</span>
     <base-btn class="next_btn" btnValue="Next"
-      :disabled="page + 1 === options.list.total_pages ? true : false"
+      :disabled="page + 1 === list.value.total_pages ? true : false"
       @click.prevent="nextPage()"
     ></base-btn>
   </div>
@@ -31,17 +32,22 @@ export default {
   components: {
     BaseBtn,
   },
+  emits: {
+    getAll: null
+  },
+  inject: ['list', 'page'],
   props: {
-    options: {
-      type: Object,
-      defalut() {
-        return { pagecount: 0 }
-      }
+    paging: {
+      type: Boolean,
+      defalut: false
+    },
+    pagecount: {
+      type: Number,
+      defalut: 0
     }
   },
   data() {
     return {
-      page: 0,
       pagelist: [],
       pagelistidx: 0,
     }
@@ -53,15 +59,15 @@ export default {
     },
     prevPage() {
       if (this.page <= 0) return
-      if (this.page % this.options.pagecount === 0) {
+      if (this.page % this.pagecount === 0) {
         this.pagelistidx -= 1
       }
       this.page -= 1
       this.$emit('getAll')
     },
     nextPage() {
-      if (this.page >= this.options.list?.total_pages ?? false) return
-      if ((this.page + 1) % this.options.pagecount === 0) {
+      if (this.page >= this.list?.total_pages ?? false) return
+      if ((this.page + 1) % this.pagecount === 0) {
         this.pagelistidx += 1
       }
       this.page += 1
@@ -69,16 +75,17 @@ export default {
     },
     initPage() {
       if (this.pagelist.length) this.pagelist = []
-      if (!this.options.list?.total_pages ?? false) return
-      let arr = new Array(this.options.list.total_pages)
+      if (!this.list?.total_pages ?? false) return
+      let arr = new Array(this.list.total_pages)
         .fill().map((_, i) => {return i+1})
-
+      console.log(arr);
       arr.some(() => {
-        this.pagelist.push(arr.splice(0, this.options.pagecount))
+        this.pagelist.push(arr.splice(0, this.pagecount))
       })
       if (arr.length !== 0) {
         this.pagelist.push(arr)
       }
+      console.log(this.pagelist)
     },
   }
 }

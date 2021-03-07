@@ -1,14 +1,21 @@
 <template>
-  <input type="checkbox" :id="`${name}_select_${item.id}`"
-    :ref="`${name}_selectRef_${item.id}`"
-    @change="select_item(item.id)"
-    :checked="selectModels.value.includes(item.id)"
-  >
-  <label :for="options.selectItems ? `${name}_select_${item.id}` : ''">
+  <div class="w-100" v-if="selectItems">
+    <input type="checkbox" :id="`${name}_select_${item.id}`"
+      :ref="`${name}_selectRef_${item.id}`"
+      @change="select_item(item.id)"
+      :checked="selectModels.value.includes(item.id)"
+    >
+    <label :for="`${name}_select_${item.id}`">
+      <slot name="select_dom">
+        item
+      </slot>
+    </label>
+  </div>
+  <div class="w-100" v-else>
     <slot name="select_dom">
       item
     </slot>
-  </label>
+  </div>
 </template>
 
 <script>
@@ -25,11 +32,9 @@ export default {
         return {}
       }
     },
-    options: {
-      type: Object,
-      default() {
-        return {}
-      }
+    selectItems: {
+      type: Boolean,
+      default: false
     }
   },
   data() {
@@ -63,11 +68,12 @@ export default {
     display: none;
   }
   label {
-    width: 100%;
     display: block;
   }
 
   input:checked + label {
+    height: 100%;
+    width: 100%;
     border-radius: 4px;
     background-color: #ffffff;
   }

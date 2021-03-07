@@ -9,7 +9,7 @@
           <label>Select {{name}}:</label>
           <select class="input_select" ref="selectRef" @change="selectId()">
             <option id="-1">select id</option>
-            <option v-for="model in list.value" :key="model.id" :id="model.id">
+            <option v-for="model in list.value.data" :key="model.id" :id="model.id">
               {{model?.name ?? model?.title ?? model.id}}
             </option>
           </select>
