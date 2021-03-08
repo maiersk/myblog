@@ -45,14 +45,14 @@
 </template>
 
 <script>
-import tagModel from './Buttons/tagModel'
-import modalCRUD from './Admin/CURD/ModalCRUD'
-import { computed } from 'vue'
+import { computed } from "vue"
+import tagModel from "./Buttons/tagModel"
+import modalCRUD from "./Admin/CURD/ModalCRUD"
 
 export default {
   components: {
     tagModel,
-    modalCRUD
+    modalCRUD,
   },
   props: {
     tags: {

@@ -41,6 +41,7 @@
 
           <div class="tags flex align-center">
             <faIcon :icon="['fas', 'tags']"></faIcon>
+
             <ul class="c_ul m-1 flex">
               <li v-for="tag in d.item.tags" :key="tag">
                 <tag-model :name="tag.name" :col="tag.color"></tag-model>
@@ -101,14 +102,12 @@
 <script>
 import listTags from './listTags'
 import tagModel from './Buttons/tagModel'
-// import BaseList from './BaseList'
 import modalCRUD from './Admin/CURD/ModalCRUD'
 import { computed } from 'vue'
 
 export default {
   components: {
     listTags,
-    // BaseList,
     modalCRUD,
     tagModel
   },

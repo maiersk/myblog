@@ -56,22 +56,19 @@
         </div>
       </slot>
     </div>
-    <slot name="List" :list="list.data">
-      <ul class="ul_list c_ul" :class="options.row ? 'flex-row' : 'flex-column'">
-        <span class="m-1 block-center" v-if="!list.data?.length">no item</span>
-        <li v-for="item in list.data" :key="item.id">
 
-          <!-- 选中项目 -->
-          <select-model :name="name" :item="item" :selectItems="options.selectItems">
-            <template #select_dom>
-              <slot name="c_item" :item="item">
-                {{item.name}}
-              </slot>
-            </template>
-          </select-model>
-        </li>
-      </ul>
-    </slot>
+    <base-list :array="list.data" :row="options.row">
+      <template #c_item="d">
+        <!-- 选中项目 -->
+        <select-model :name="name" :item="d.item" :selectItems="options.selectItems">
+          <template #select_dom>
+            <slot name="c_item" :item="d.item">
+              {{d.item.name}}
+            </slot>
+          </template>
+        </select-model>
+      </template>
+    </base-list>
 
     <!-- 列表分页 -->
     <page-btns
@@ -88,8 +85,8 @@ import { computed } from 'vue'
 import createModel from '../../Modals/createModel'
 import editModel from '../../Modals/editModel'
 import delModel from '../../Modals/delModel'
-import listBaseCRUD from '../listBaseCRUD'
 import selectModel from "../SelectModel";
+import listBaseCRUD from '../listBaseCRUD'
 
 export default {
   components: {
@@ -103,10 +100,6 @@ export default {
   ],
   inject: ['model'],
   props: {
-    name: {
-      type: String,
-      default: ''
-    }
   },
   provide() {
     return {
@@ -144,14 +137,6 @@ export default {
   margin-top: 0.5rem;
   border: 1px solid #303030;
   background-color: #202020;
-  
-  .ul_list {
-    li {
-      display: flex;
-      align-items: center;
-      margin: 0.25rem;
-    }
-  }
 }
 
 .list_header {

@@ -35,18 +35,7 @@
     <template #body>
       <div class="content" v-html="$root.markedContent(post.content)"></div>
 
-      <div class="discuss">
-        <div class="discuss_header">
-          <span>{{post.comments.length}}</span>条评论
-          <div class="c-divider c-divider-horizontal"></div>
-        </div>
-        <div class="send_comment">
-          <comment-model :send_mode="true"></comment-model>
-        </div>
-        <div class="comments">
-          <list-comments></list-comments>
-        </div>
-      </div>
+      <list-comments></list-comments>
     </template>
   </page-theme>
 </template>
@@ -56,14 +45,12 @@ import pageTheme from "../components/pageTheme";
 import { axiosReq } from "../plugins/axios";
 import tagModel from "../components/Buttons/tagModel";
 import listComments from "../components/listComments";
-import commentModel from "../components/commentModel";
 
 export default {
   components: {
     pageTheme,
     tagModel,
     listComments,
-    commentModel
   },
   data() {
     return {
@@ -104,21 +91,5 @@ export default {
 
   .content {
     margin: 1rem 10px;
-  }
-
-  .discuss {
-    position: relative;
-    box-sizing: border-box;
-
-    > .discuss_header {
-      > span {
-        color: #d78520;
-        padding: 0 8px;
-      }
-    }
-
-    > .send_comment {
-
-    }
   }
 </style>

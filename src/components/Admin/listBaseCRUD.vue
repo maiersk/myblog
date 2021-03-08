@@ -2,6 +2,7 @@
 import { computed } from "vue";
 import { axiosReq } from "../../plugins/axios";
 import pageBtns from "./PageBtns";
+import BaseList from "../BaseList";
 
 /**
  * 基础模型CRUD组件
@@ -11,7 +12,8 @@ import pageBtns from "./PageBtns";
 
 export default {
   components: {
-    pageBtns
+    pageBtns,
+    BaseList,
   },
   props: {
     name: {

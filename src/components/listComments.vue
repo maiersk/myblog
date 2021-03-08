@@ -1,47 +1,37 @@
 <template>
-  <modalCRUD name="Comment" url="/comments" :options="{
-    selectItems: false,
-    row: false,
-    paging: false,
-    pagecount: 4,
-    count: 5,
-  }">
-    <template #c_item="d">
-      <comment-model :model="d.item"></comment-model>
-    </template>
+  <div class="discuss">
+    <div class="discuss_header">
+      <span>{{0}}</span>条评论
+      <div class="c-divider c-divider-horizontal"></div>
+    </div>
+    <divCRUD name="Comment" url="/comments" :options="{
+      selectItems: false,
+      row: false,
+      paging: false,
+      pagecount: 4,
+      count: 5,
+    }">
+      <template #c_operate>
+        <div class="">
+          <comment-model :send_model="true"></comment-model>
+        </div>
+      </template>
 
-    <template v-slot:createModel>
-      <div class="form-group">
-        <label>Comment content:</label>
-        <textarea class="textarea_c" 
-          cols="30" rows="35" v-model="model.content"
-        ></textarea>
-      </div>
-    </template>
-    <template v-slot:editModel>
-      <div class="form-group">
-        <label>Comment content:</label>
-        <textarea class="textarea_c" 
-          cols="30" rows="35" v-model="model.content"
-        ></textarea>
-      </div>
-    </template>
-    <template v-slot:deleteModel>
-      <div></div>
-    </template>
-  </modalCRUD>
+      <template #c_item="d">
+        <comment-model :model="d.item"></comment-model>
+      </template>
+    </divCRUD>
+  </div>
 </template>
 
 <script>
 import { computed } from "vue";
-import modalCRUD from "./Admin/CURD/ModalCRUD";
+import divCRUD from "./Admin/CURD/DivCRUD";
 import commentModel from "./commentModel";
-// import BaseList from "./BaseList";
 
 export default {
   components: {
-    // BaseList,
-    modalCRUD,
+    divCRUD,
     commentModel,
   },
   props: {
@@ -86,6 +76,20 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
+  .discuss {
+    position: relative;
+    box-sizing: border-box;
 
+    > .discuss_header {
+      > span {
+        color: #d78520;
+        padding: 0 8px;
+      }
+    }
+
+    > .send_comment {
+
+    }
+  }
 </style>
