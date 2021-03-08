@@ -1,25 +1,24 @@
 <template>
-  {{pagelist}}
   <div class="page_btn flex justify-center align-center" 
     v-if="paging && list.value?.data?.length"
   >
     <base-btn class="prev_btn" btnValue="Prev"
-      :disabled="page === 0 ? true : false"
+      :disabled="page.value === 0 ? true : false"
       @click.prevent="prevPage()"
     ></base-btn>
     <ul class="c_ul flex" v-if="list.value?.total_pages ?? false">
       <li v-for="i in pagelist[pagelistidx]" :key="i">
         <base-btn
           btnClass="p_btn" :btnValue="''+i"
-          :disabled="page === i - 1 ? true : false"
+          :disabled="page.value === i - 1 ? true : false"
           @click.prevent="selectPage(i - 1)"
         >
         </base-btn>
       </li>
     </ul>
-    <span>page: {{page + 1}}</span>
+    <span>page: {{page.value + 1}}</span>
     <base-btn class="next_btn" btnValue="Next"
-      :disabled="page + 1 === list.value.total_pages ? true : false"
+      :disabled="page.value + 1 === list.value.total_pages ? true : false"
       @click.prevent="nextPage()"
     ></base-btn>
   </div>
@@ -54,38 +53,37 @@ export default {
   },
   methods: {
     selectPage(i) {
-      this.page = i
+      this.page.value = i
       this.$emit('getAll')
     },
     prevPage() {
-      if (this.page <= 0) return
-      if (this.page % this.pagecount === 0) {
+      if (this.page.value <= 0) return
+      if (this.page.value % this.pagecount === 0) {
         this.pagelistidx -= 1
       }
-      this.page -= 1
+      this.page.value -= 1
       this.$emit('getAll')
     },
     nextPage() {
-      if (this.page >= this.list?.total_pages ?? false) return
-      if ((this.page + 1) % this.pagecount === 0) {
+      if (this.page.value >= this.list.value?.total_pages ?? false) return
+      if ((this.page.value + 1) % this.pagecount === 0) {
         this.pagelistidx += 1
       }
-      this.page += 1
+      this.page.value += 1
       this.$emit('getAll')
     },
     initPage() {
       if (this.pagelist.length) this.pagelist = []
-      if (!this.list?.total_pages ?? false) return
-      let arr = new Array(this.list.total_pages)
+      if (!this.list.value?.total_pages ?? false) return
+      let arr = new Array(this.list.value.total_pages)
         .fill().map((_, i) => {return i+1})
-      console.log(arr);
       arr.some(() => {
         this.pagelist.push(arr.splice(0, this.pagecount))
       })
+
       if (arr.length !== 0) {
         this.pagelist.push(arr)
       }
-      console.log(this.pagelist)
     },
   }
 }

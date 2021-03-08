@@ -38,7 +38,10 @@ export default {
   provide() {
     return {
       list: computed(() => {return this.list}),
-      page: computed(() => {return this.page}),
+      page: computed({
+        set: (val) => {this.page = val},
+        get: () => {return this.page}
+      }),
     }
   },
   data() {

@@ -12,6 +12,8 @@ export function axiosReq(option) {
     }).then((res) => {
       if (res.data.success && res.data.data) {
         resolve(res.data)
+      } else {
+        reject(new Error(res.data?.data ?? 'Error'))
       }
     }).catch((err) => {
       reject(err)
