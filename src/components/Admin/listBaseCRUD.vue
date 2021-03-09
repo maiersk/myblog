@@ -57,6 +57,9 @@ export default {
     this.getAll()
   },
   methods: {
+    cleanModel() {
+      this.model.value = {}
+    },
     getAll() {
       let url = this.url
       const {paging, count} = this.options
