@@ -14,52 +14,43 @@
         l_h: true,
       }"></panel-presonal>
     </div>
-    <div class="comment_content" v-if="send_mode">
-      <textarea class="textarea_c" rows="4"></textarea>
+    <div class="comment_content">
+      <slot name="c_content">
+        <div class="comment_content_author">
+          <slot name="content_author">
+            <span class="author_name">
+              {{model.userId}}
+            </span>
+            <span class="author_time" v-if="model.createdAt">
+              {{$root.format_time(model.createdAt, "YYYY-mm-dd")}}
+            </span>
+          </slot>
+        </div>
 
-      <base-btn class="ml-auto" btnValue="Send"></base-btn>     
-    </div>
-    <div class="comment_content" v-else>
-      <div class="comment_content_author">
-        <slot name="content_author">
-          <span class="author_name">
-            {{model.userId}}
-          </span>
-          <span class="author_time" v-if="model.createdAt">
-            {{$root.format_time(model.createdAt, "YYYY-mm-dd")}}
-          </span>
-        </slot>
-      </div>
+        <div class="comment_content_detail">
+          <slot name="content_detail">
+            <div class="article_detail">
+              {{model.content}}
+            </div>
+          </slot>
+        </div>
 
-      <div class="comment_content_detail">
-        <slot name="content_detail">
-          <div class="article_detail">
-            {{model.content}}
-          </div>
-        </slot>
-      </div>
-
-      <ul class="comment_actions c_ul">
-        <!-- <li></li> -->
-      </ul>
+        <ul class="comment_actions c_ul">
+          <!-- <li></li> -->
+        </ul>
+      </slot>
     </div>
   </div>
 </template>
 
 <script>
 import panelPresonal from "./panelPresonal";
-import BaseBtn from "./BaseButton";
 
 export default {
   components: {
     panelPresonal,
-    BaseBtn,
   },
   props: {
-    send_mode: {
-      type: Boolean,
-      default: false
-    },
     model: {
       type: Object,
       default() {
@@ -71,13 +62,14 @@ export default {
   },
   data() {
     return {
-      state: this.$store.state
+      state: this.$store.state,
+      content: this.model.content
     }
   }
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .comment_avatar {
   margin: 0 12px;
   cursor: pointer;

@@ -28,10 +28,17 @@ export default {
       type: Object,
       default() {
         return {
-          selectItems: false,
+          // url中添加搜索参数
+          search: '',
+          // 是否开启选中item
+          selectItems: false, 
+          // 是否开启分页
           paging: false,
+          // 分页数
           pagecount: 5,
+          // 一页数
           count: 10,
+          // 列表使用排，排列
           row: false,
         }
       }
@@ -65,6 +72,13 @@ export default {
       const {paging, count} = this.options
       if (paging) {
         url = `${this.url}?page=${this.page}&count=${count ? count : 10}`
+      }
+      if (this.options.search !== '') {
+        if (!paging) {
+          url += `?${this.options.search}`
+        } else {
+          url += `&${this.options.search}`
+        }
       }
 
       axiosReq({

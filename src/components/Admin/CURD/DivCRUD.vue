@@ -2,7 +2,7 @@
   <div class="container">
     <div class="operate">
       <form class="container">
-        <slot name="c_operate">
+        <slot name="c_operate" :curd="this">
           something
         </slot>
       </form>

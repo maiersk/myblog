@@ -1,24 +1,36 @@
 <template>
   <div class="discuss">
     <div class="discuss_header">
-      <span>{{0}}</span>条评论
+      <span>{{}}</span>条评论
       <div class="c-divider c-divider-horizontal"></div>
     </div>
     <divCRUD name="Comment" url="/comments" :options="{
-      selectItems: false,
-      row: false,
-      paging: false,
-      pagecount: 4,
-      count: 5,
-    }">
-      <template #c_operate>
-        <div class="">
-          <comment-model :send_model="true"></comment-model>
-        </div>
+        search: `postId=${postId}`,
+        selectItems: false,
+        row: false,
+        paging: false,
+        pagecount: 4,
+        count: 5,
+      }">
+      <template #c_operate="f">
+        <commentModel>
+          <template #c_content>
+            <textarea class="textarea_c" rows="4"
+              v-model="model.content"
+            ></textarea>
+
+            <base-btn class="ml-auto"
+              btnValue="Send"
+              @click.prevent="f.curd.add()"
+            ></base-btn>
+          </template>
+        </commentModel>
       </template>
 
-      <template #c_item="d">
-        <comment-model :model="d.item"></comment-model>
+      <template #c_item="comments">
+        <commentModel class="ptb-1" :model="comments.item">
+
+        </commentModel>
       </template>
     </divCRUD>
   </div>
@@ -28,19 +40,19 @@
 import { computed } from "vue";
 import divCRUD from "./Admin/CURD/DivCRUD";
 import commentModel from "./commentModel";
+import baseBtn from "./BaseButton";
 
 export default {
   components: {
     divCRUD,
     commentModel,
+    baseBtn,
   },
   props: {
-    comments: {
-      type: Array,
-      default() {
-        return []
-      }
-    }
+    postId: {
+      type: Number,
+      default: -1
+    },
   },
   provide() {
     return {
@@ -67,10 +79,12 @@ export default {
       model: {
         id: null,
         content: null,
-        postId: null,
+        postId: this.postId,
         userId: null,
         replyId: null
-      }
+      },
+      state: this.$store.state,
+      comments: [],
     }
   }
 }
@@ -90,6 +104,6 @@ export default {
 
     > .send_comment {
 
-    }
+    } 
   }
 </style>

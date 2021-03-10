@@ -122,10 +122,6 @@ export default {
     openModal(name) {
       this.select_modal = name
     },
-    cleanModel() {
-      this.model.value = {}
-    },
-
   }
 }
 </script>

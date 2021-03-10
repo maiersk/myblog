@@ -35,7 +35,9 @@
     <template #body>
       <div class="content" v-html="$root.markedContent(post.content)"></div>
 
-      <list-comments></list-comments>
+      <list-comments :postId="post.id"
+        :array="post.comments"
+      ></list-comments>
     </template>
   </page-theme>
 </template>
