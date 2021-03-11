@@ -117,13 +117,13 @@ export default {
         this.$root.openNotifi(false, err)
       })
     },
-    edit() {
-      if (this.model.value?.id ?? false) {
-        const id = this.model.value.id
+    edit(id) {
+      const _id = id ?? this.model.value.id
 
+      if (_id) {
         axiosReq({
           method: 'put',
-          url: `${this.url}/${id}`,
+          url: `${this.url}/${_id}`,
           data: this.model.value,
         }).then(() => {
           this.getAll()
@@ -134,13 +134,13 @@ export default {
         })
       }
     },
-    del() {
-      if (this.model.value?.id ?? false) {
-        const id = this.model.value.id
+    del(id) {
+      const _id = id ?? this.model.value.id
 
+      if (_id) {
         axiosReq({
           method: 'delete',
-          url: `${this.url}/${id}`,
+          url: `${this.url}/${_id}`,
         }).then(() => {
           this.getAll()
           this.cleanModel()

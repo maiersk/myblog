@@ -18,11 +18,11 @@
       <slot name="c_content">
         <div class="comment_content_author">
           <slot name="content_author">
-            <span class="author_name">
-              {{model.userId}}
+            <span class="author_name mr-1">
+              {{model.user.name}}
             </span>
             <span class="author_time" v-if="model.createdAt">
-              {{$root.format_time(model.createdAt, "YYYY-mm-dd")}}
+              {{$root.fromNow(model.createdAt)}}
             </span>
           </slot>
         </div>
@@ -35,9 +35,10 @@
           </slot>
         </div>
 
-        <ul class="comment_actions c_ul">
-          <!-- <li></li> -->
-        </ul>
+        <div class="comment_actions c_ul flex">
+          <slot name="c_actions">
+          </slot>
+        </div>
       </slot>
     </div>
   </div>
@@ -79,6 +80,11 @@ export default {
   padding: 0 10px;
   max-height: 100%;
   height: 100%;
+
+  .comment_content_detail {
+    padding: 1rem 0 1rem 0.5rem;
+  }
+
   .textarea_c {
     width: 100%;
     max-width: 100%;
