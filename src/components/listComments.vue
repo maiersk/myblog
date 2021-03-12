@@ -32,15 +32,35 @@
       <template #c_item="comment">
         <commentModel class="ptb-1" :model="comment.item">
           <template #c_actions>
-            <a class="c_a replay mr-1">
-              replay
+            <a class="c_a mr-1"
+              @click.prevent="openReply = !openReply"
+            >
+              reply
             </a>
 
             <a class="c_a delete_btn text-c-red"
+              v-if="state.isLogged"
               @click.prevent="crudRef.del(comment.item.id)"
             >
               <faIcon :icon="['fas', 'trash-alt']"></faIcon>
             </a>
+          </template>
+
+          <template #c_rear>
+            <div v-if="openReply">
+              <commentModel class="reply" :showAvatar="false">
+                <template #c_content>
+                  <textarea class="textarea_c" rows="4"
+                    v-model="reply.content"
+                  ></textarea>
+
+                  <base-btn class="ml-auto"
+                    btnValue="Send"
+                    @click.prevent=""
+                  ></base-btn>
+                </template>
+              </commentModel>
+            </div>
           </template>
         </commentModel>
       </template>
@@ -95,9 +115,14 @@ export default {
         userId: null,
         replyId: null
       },
+      reply: {
+        userId: null,
+        content: null,
+      },
       state: this.$store.state,
       comments: [],
       crudRef: null,
+      openReply: false,
     }
   },
   mounted() {
@@ -118,8 +143,8 @@ export default {
       }
     }
 
-    > .send_comment {
-
-    } 
+    .reply {
+      padding: 1rem 0 0 1rem;
+    }
   }
 </style>
