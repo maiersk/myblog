@@ -56,7 +56,7 @@
 
                   <base-btn class="ml-auto"
                     btnValue="Send"
-                    @click.prevent=""
+                    @click.prevent="reqReply(comment.item.id)"
                   ></base-btn>
                 </template>
               </commentModel>
@@ -73,6 +73,7 @@ import { computed } from "vue";
 import divCRUD from "./Admin/CURD/DivCRUD";
 import commentModel from "./commentModel";
 import baseBtn from "./BaseButton";
+import { axiosReq } from "../plugins/axios";
 
 export default {
   components: {
@@ -116,7 +117,6 @@ export default {
         replyId: null
       },
       reply: {
-        userId: null,
         content: null,
       },
       state: this.$store.state,
@@ -127,6 +127,24 @@ export default {
   },
   mounted() {
     this.crudRef = this.$refs['crudRef']
+  },
+  methods: {
+    reqReply(commentId) {
+      axiosReq({
+        method: 'post',
+        url: '/comments/reply',
+        data: {
+          commentId,
+          content: this.reply.content
+        }
+      }).then((res) => {
+        console.log(res)
+
+        this.$root.openNotifi(true, 'test')
+      }).catch((err) => {
+        this.$root.openNotifi(false, err)
+      })
+    }
   }
 }
 </script>
